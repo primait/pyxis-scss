@@ -1,0 +1,15 @@
+@use "fonts";
+
+$background: #333333;
+
+body {
+  background-color: $background;
+  color: #ffffff;
+  font-family: "CircularXXWeb-Bold", "Helvetica", "Arial", sans-serif;
+  font-feature-settings: "ss08" on;
+  font-size: 25px;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-variant-ligatures: none;
+  text-rendering: optimizeLegibility;
+}

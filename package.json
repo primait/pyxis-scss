@@ -1,0 +1,38 @@
+{
+  "name": "pyxis-scss",
+  "version": "0.0.1",
+  "description": "Pyxis foundations and components in HTML and SCSS.",
+  "main": "src/index.js",
+  "repository": "git@github.com:primait/pyxis-scss.git",
+  "author": "pyxis-scss mantainers can be found here: https://github.com/primait/pyxis-scss",
+  "license": "ISC",
+  "private": false,
+  "scripts": {
+    "lint": "stylelint \"src/scss/**/*.scss\"",
+    "lint:autofix": "stylelint \"src/scss/**/*.scss\" --fix",
+    "build": "webpack --config webpack.config.js",
+    "serve": "webpack serve"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "autoprefixer": "^10.3.7",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.3.0",
+    "cssnano": "^5.0.8",
+    "postcss": "^8.3.9",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-loader": "^6.1.1",
+    "postcss-preset-env": "^6.7.0",
+    "sass": "^1.42.1",
+    "sass-loader": "^12.1.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-recommended": "^5.0.0",
+    "stylelint-declaration-block-no-ignored-properties": "^2.4.0",
+    "stylelint-order": "^4.1.0",
+    "stylelint-scss": "^3.21.0",
+    "stylelint-webpack-plugin": "^3.0.1",
+    "webpack": "^5.57.1",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.3.1"
+  }
+}
