@@ -1,0 +1,22 @@
+/**
+ * Throw Error if $keys is not in map
+ *
+ * @param {Map} $map - A map
+ * @param {Args} $keys - Keys in map
+ * @return {Sass::Script::Value::Base}
+ * @throws {Error}
+ *
+ * @access public
+ */
+@function mapGetOrDie($map, $keys...) {
+  @each $key in $keys {
+    @if not map-has-key($map, $key) {
+      @error "Unknown key `#{$keys}` in map";
+    }
+    $map: map-get($map, $key);
+  }
+
+  @return $map;
+}
+
+

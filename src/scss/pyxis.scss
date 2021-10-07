@@ -1,10 +1,12 @@
 @use "fonts";
+@use "foundations";
+@use "atoms";
 
-$background: #333333;
+$background: foundations.gradient(neutral);
 
 body {
-  background-color: $background;
-  color: #ffffff;
+  background: $background;
+  color: foundations.color(neutralLight);
   font-family: "CircularXXWeb-Bold", "Helvetica", "Arial", sans-serif;
   font-feature-settings: "ss08" on;
   font-size: 25px;
@@ -13,3 +15,4 @@ body {
   font-variant-ligatures: none;
   text-rendering: optimizeLegibility;
 }
+
