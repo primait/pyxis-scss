@@ -1,0 +1,140 @@
+/**
+ * Physical address of the fonts-containing folder
+ * @type String
+ * @access public
+ */
+$fontPath: "../fonts" !default;
+
+/**
+ * Name of Pyxis base font-family
+ *
+ * @type String
+ * @access private
+ */
+$_fontFamily: "Circular";
+
+/**
+ * Base font-family with fallback
+ *
+ * @type Number
+ * @access private
+ */
+$_fontFamilyWithFallback: $_fontFamily, "Arial", sans-serif;
+
+/**
+ * Font feature settings for Circular font
+ * The "ss08" setting allows high numbers to be rendered as capital letters
+ *
+ * @type List
+ * @access private
+ */
+$_fontFeatureSettings: "ss08" on;
+
+/**
+ * Font weight for light typography
+ *
+ * @type Number
+ * @access private
+ */
+$_fontWeightLight: 200;
+
+/**
+ * Font weight for regular typography
+ *
+ * @type Number
+ * @access private
+ */
+$_fontWeightBook: 400;
+
+/**
+ * Font weight for bold typography
+ *
+ * @type Number
+ * @access private
+ */
+$_fontWeightBold: 700;
+
+/**
+ * The map of font-weight available in Pyxis
+ *
+ * @type Map
+ * @access private
+ */
+$_fontWeights: (
+  light: $_fontWeightLight,
+  book: $_fontWeightBook,
+  bold: $_fontWeightBold,
+) !default;
+
+/**
+ * The map of fonts and font-weight available in Pyxis
+ *
+ * @type Map
+ * @access private
+ */
+$_fonts: (
+  light: (
+    fileName: "CircularXXWeb-Light",
+    weight: $_fontWeightLight
+  ),
+  book: (
+    fileName: "CircularXXWeb-Book",
+    weight: $_fontWeightBook
+  ),
+  bold: (
+    fileName: "CircularXXWeb-Bold",
+    weight: $_fontWeightBold
+  ),
+) !default;
+
+/**
+ * Font size root
+ *
+ * @type Number
+ * @access public
+ */
+$fontSizeRoot: 16px;
+
+/**
+ * Base setting for Pyxis typography
+ *
+ * @access public
+ */
+@mixin typographySetting() {
+  font-family: $_fontFamilyWithFallback;
+  font-feature-settings: $_fontFeatureSettings;
+  font-size: $fontSizeRoot;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-variant-ligatures: none;
+  font-weight: $_fontWeightBook;
+  text-rendering: optimizeLegibility;
+}
+
+/**
+ * Include the font-weight by name available in $_fontWeights
+ *
+ * @access public
+ */
+@mixin fontWeight($weight) {
+  @if not map-has-key($_fontWeights, $weight) {
+    @error "Unknown key `#{$weight}` in map `$_fonts`";
+  }
+  font-weight: #{map-get($_fonts, $weight, weight)};
+}
+
+/**
+ * Create @font-face for all fonts available in $_fonts map
+ */
+@each $name, $font in $_fonts {
+  @font-face {
+    font-display: swap;
+    font-family: $_fontFamily;
+    font-style: normal;
+    font-weight: #{map-get($font, weight)};
+    src:
+      url("#{$fontPath}/#{map-get($font, fileName)}.woff") format("woff"),
+      url("#{$fontPath}/#{map-get($font, fileName)}.woff2") format("woff2");
+  }
+}
+
