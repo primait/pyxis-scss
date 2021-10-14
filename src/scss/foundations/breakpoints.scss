@@ -1,0 +1,52 @@
+@use "../lib";
+
+/**
+ * The breakpoints of Pyxis
+ *
+ * @type Map
+ * @access private
+ */
+$_breakpoints: (
+  base: 1px,
+  xsmall: 576px,
+  small: 768px,
+  medium: 992px,
+  large: 1200px,
+  xlarge: 1920px,
+);
+
+$breakpointBoundDiff: 1px;
+
+/**
+ * Returns the $breakpoint value from map $_breakpoints
+ *
+ * @param {String} $breakpoint - Name of breakpoint
+ * @return {Value} Representation of breakpoint color
+ * @throws {Error}
+ *
+ * @access public
+ */
+@function breakpoint($breakpoint) {
+  @return lib.mapGetOrDie($_breakpoints, $breakpoint);
+}
+
+/**
+ * Wraps @content inside a media-query with a min-width and max-width (optional)
+ *
+ * @param {String} $from - Name of breakpoint
+ * @param {String | Boolean} $until - Name of breakpoint
+ * @throws {Error}
+ *
+ * @access public
+ */
+@mixin mq($from, $until: false) {
+  $mediaQuery: "screen and (min-width: #{breakpoint($from)})";
+
+  @if $until {
+    $mediaQuery: "#{$mediaQuery} and (max-width: #{breakpoint($until) - $breakpointBoundDiff})";
+  }
+
+  @media #{$mediaQuery} {
+    @content;
+  }
+}
