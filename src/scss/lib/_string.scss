@@ -1,0 +1,67 @@
+/**
+ * Converts a camelCase $string into a kebab-case one.
+ *
+ * @param {String} $string - String in camelCase
+ * @return {String} - String in kebab-case
+ *
+ * @access public
+ */
+@function camelToKebabCase($string) {
+  $alphabet: "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z";
+  $numbers: "0", "1", "2", "3", "4", "5", "6", "7", "8", "9";
+  $charList: stringToCharList(stringReplace($string, " ", ""));
+  $kebabString: "";
+
+  @for $i from 1 through length($charList) {
+    $char: nth($charList, $i);
+
+    @if not index($alphabet, $char) and not index($numbers, $char) {
+      $kebabString: $kebabString + $char;
+    } @else if index($numbers, $char) {
+      $prevChar: nth($charList, $i - 1);
+      $separator: if(index($numbers, $prevChar), "", "-");
+      $kebabString: $kebabString + $separator + $char;
+    } @else {
+      $separator: if(index($charList, $char) == 1, "", "-");
+      $kebabString: $kebabString + $separator + to_lower_case($char);
+    }
+  }
+
+  @return $kebabString;
+}
+
+/**
+ * Replace `$search` with `$replace` in `$string`
+ *
+ * @param {String} $string - Initial string
+ * @param {String} $search - Substring to replace
+ * @param {String} $replace - A new value for `$search` string
+ * @return {String}
+ *
+ * @access public
+ */
+@function stringReplace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + stringReplace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  @return $string;
+}
+
+/**
+ * Splits a string into a list of characters.
+ *
+ * @param {String} $string - A string to split into characters.
+ * @return {List} - List of characters of $string
+ *
+ * @access public
+ */
+@function stringToCharList($string) {
+  $chars: ();
+
+  @for $i from 1 through str-length($string) {
+    $chars: append($chars, str-slice($string, $i, $i));
+  }
+
+  @return $chars;
+}

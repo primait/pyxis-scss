@@ -8,9 +8,9 @@
   "license": "ISC",
   "private": false,
   "scripts": {
+    "build": "webpack --config webpack.config.js",
     "lint": "stylelint \"src/scss/**/*.scss\"",
     "lint:autofix": "stylelint \"src/scss/**/*.scss\" --fix",
-    "build": "webpack --config webpack.config.js",
     "serve": "webpack serve"
   },
   "dependencies": {},
