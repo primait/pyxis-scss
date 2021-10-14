@@ -1,0 +1,38 @@
+{
+  "color": {
+    "action": {
+      "base": { "value": "#067f96" },
+      "dark": { "value": "#e5f1f4" },
+      "light": { "value": "#045767" }
+    },
+    "alert": {
+      "base": { "value": "#ffdc50" },
+      "dark": { "value": "#fff8dc" },
+      "light": { "value": "#ffc010" }
+    },
+    "brand": {
+      "base": { "value": "#8334c2" },
+      "dark": { "value": "#f2eaf8" },
+      "light": { "value": "#5b2488" }
+    },
+    "error": {
+      "base": { "value": "#df1654" },
+      "dark": { "value": "#fbe7ed" },
+      "light": { "value": "#b21143" }
+    },
+    "neutral": {
+      "25": { "value": "#595d6a" },
+      "50": { "value": "#90939d" },
+      "75": { "value": "#c7c9cd" },
+      "85": { "value": "#dddee1" },
+      "95": { "value": "#f3f4f4" },
+      "base": { "value": "#21283b" },
+      "light": { "value": "#ffffff" }
+    },
+    "success": {
+      "base": { "value": "#1d8147" },
+      "dark": { "value": "#e8f2ec" },
+      "light": { "value": "#145a31" }
+    }
+  }
+}

@@ -1,37 +1,9 @@
-@use "sass:color";
 @use "../lib";
+@use "../tokens/colors" as token;
 
-$_colorActionBase: #067f96;
-$_colorActionDark: #e5f1f4;
-$_colorActionLight: #045767;
-
-$_colorAlertBase: #ffdc50;
-$_colorAlertDark: #fff8dc;
-$_colorAlertLight: #ffc010;
-
-$_colorBrandBase: #8334c2;
-$_colorBrandDark: #f2eaf8;
-$_colorBrandLight: #5b2488;
-
-$_colorErrorBase: #df1654;
-$_colorErrorDark: #fbe7ed;
-$_colorErrorLight: #b21143;
-
-$_colorNeutral25: #595d6a;
-$_colorNeutral50: #90939d;
-$_colorNeutral75: #c7c9cd;
-$_colorNeutral85: #dddee1;
-$_colorNeutral95: #f3f4f4;
-$_colorNeutralBase: #21283b;
-$_colorNeutralLight: #ffffff;
-
-$_colorSuccessBase: #1d8147;
-$_colorSuccessDark: #e8f2ec;
-$_colorSuccessLight: #145a31;
-
-$_gradientAction: linear-gradient(45deg, $_colorActionBase, $_colorActionLight);
-$_gradientBrand: linear-gradient(45deg, $_colorBrandBase, $_colorBrandLight);
-$_gradientNeutral: linear-gradient(45deg, $_colorNeutral25, $_colorNeutralBase);
+$_gradientAction: linear-gradient(45deg, token.$color-action-base, token.$color-action-light);
+$_gradientBrand: linear-gradient(45deg, token.$color-brand-base, token.$color-brand-light);
+$_gradientNeutral: linear-gradient(45deg, token.$color-neutral-25, token.$color-neutral-base);
 
 /**
  * The color palette of Pyxis
@@ -40,28 +12,28 @@ $_gradientNeutral: linear-gradient(45deg, $_colorNeutral25, $_colorNeutralBase);
  * @access private
  */
 $_colors: (
-  actionBase: $_colorActionBase,
-  actionDark: $_colorActionDark,
-  actionLight: $_colorActionLight,
-  alertBase: $_colorAlertBase,
-  alertDark: $_colorAlertDark,
-  alertLight: $_colorAlertLight,
-  brandBase: $_colorBrandBase,
-  brandDark: $_colorBrandDark,
-  brandLight: $_colorBrandLight,
-  errorBase: $_colorErrorBase,
-  errorDark: $_colorErrorDark,
-  errorLight: $_colorErrorLight,
-  neutral25: $_colorNeutral25,
-  neutral50: $_colorNeutral50,
-  neutral75: $_colorNeutral75,
-  neutral85: $_colorNeutral85,
-  neutral95: $_colorNeutral95,
-  neutralBase: $_colorNeutralBase,
-  neutralLight: $_colorNeutralLight,
-  successBase: $_colorSuccessBase,
-  successDark: $_colorSuccessDark,
-  successLight: $_colorSuccessLight,
+  actionBase: token.$color-action-base,
+  actionDark: token.$color-action-dark,
+  actionLight: token.$color-action-light,
+  alertBase: token.$color-alert-base,
+  alertDark: token.$color-alert-dark,
+  alertLight: token.$color-alert-light,
+  brandBase: token.$color-brand-base,
+  brandDark: token.$color-brand-dark,
+  brandLight: token.$color-brand-light,
+  errorBase: token.$color-error-base,
+  errorDark: token.$color-error-dark,
+  errorLight: token.$color-error-light,
+  neutral25: token.$color-neutral-25,
+  neutral50: token.$color-neutral-50,
+  neutral75: token.$color-neutral-75,
+  neutral85: token.$color-neutral-85,
+  neutral95: token.$color-neutral-95,
+  neutralBase: token.$color-neutral-base,
+  neutralLight: token.$color-neutral-light,
+  successBase: token.$color-success-base,
+  successDark: token.$color-success-dark,
+  successLight: token.$color-success-light,
 );
 
 /**
