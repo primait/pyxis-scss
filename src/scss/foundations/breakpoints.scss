@@ -4,9 +4,9 @@
  * The breakpoints of Pyxis
  *
  * @type Map
- * @access private
+ * @access public
  */
-$_breakpoints: (
+$breakpoints: (
   base: 1px,
   xsmall: 576px,
   small: 768px,
@@ -15,10 +15,16 @@ $_breakpoints: (
   xlarge: 1920px,
 );
 
-$breakpointBoundDiff: 1px;
+/**
+ * Breakpoint bounding difference
+ *
+ * @type Value
+ * @access private
+ */
+$_breakpointBoundDiff: 1px;
 
 /**
- * Returns the $breakpoint value from map $_breakpoints
+ * Returns the $breakpoint value from map $breakpoints
  *
  * @param {String} $breakpoint - Name of breakpoint
  * @return {Value} Representation of breakpoint color
@@ -27,7 +33,7 @@ $breakpointBoundDiff: 1px;
  * @access public
  */
 @function breakpoint($breakpoint) {
-  @return lib.mapGetOrDie($_breakpoints, $breakpoint);
+  @return lib.mapGetOrDie($breakpoints, $breakpoint);
 }
 
 /**
@@ -43,7 +49,7 @@ $breakpointBoundDiff: 1px;
   $mediaQuery: "screen and (min-width: #{breakpoint($from)})";
 
   @if $until {
-    $mediaQuery: "#{$mediaQuery} and (max-width: #{breakpoint($until) - $breakpointBoundDiff})";
+    $mediaQuery: "#{$mediaQuery} and (max-width: #{breakpoint($until) - $_breakpointBoundDiff})";
   }
 
   @media #{$mediaQuery} {
