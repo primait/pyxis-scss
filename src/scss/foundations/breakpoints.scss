@@ -1,18 +1,25 @@
 @use "../lib";
 
+$_breakpointBase: 1px;
+$_breakpointXsmall: 576px;
+$_breakpointSmall: 768px;
+$_breakpointMedium: 992px;
+$_breakpointLarge: 1200px;
+$_breakpointXlarge: 1920px;
+
 /**
  * The breakpoints of Pyxis
  *
  * @type Map
- * @access public
+ * @access private
  */
-$breakpoints: (
-  base: 1px,
-  xsmall: 576px,
-  small: 768px,
-  medium: 992px,
-  large: 1200px,
-  xlarge: 1920px,
+$_breakpoints: (
+  base: $_breakpointBase,
+  xsmall: $_breakpointXsmall,
+  small: $_breakpointSmall,
+  medium: $_breakpointMedium,
+  large: $_breakpointLarge,
+  xlarge: $_breakpointXlarge
 );
 
 /**
@@ -33,7 +40,7 @@ $_breakpointBoundDiff: 1px;
  * @access public
  */
 @function breakpoint($breakpoint) {
-  @return lib.mapGetOrDie($breakpoints, $breakpoint);
+  @return lib.mapGetOrDie($_breakpoints, $breakpoint);
 }
 
 /**
