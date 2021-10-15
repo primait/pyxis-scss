@@ -47,12 +47,12 @@ $_breakpointBoundDiff: 1px;
  * Wraps @content inside a media-query with a min-width and max-width (optional)
  *
  * @param {String} $from - Name of breakpoint
- * @param {String | Boolean} $until - Name of breakpoint
+ * @param {String | Null} $until - Name of breakpoint
  * @throws {Error}
  *
  * @access public
  */
-@mixin mq($from, $until: false) {
+@mixin mq($from, $until: null) {
   $mediaQuery: "screen and (min-width: #{breakpoint($from)})";
 
   @if $until {

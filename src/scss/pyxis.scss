@@ -1,24 +1,3 @@
 @use "fonts";
 @use "foundations";
 @use "atoms";
-
-body {
-  background-color: foundations.color(neutralBase);
-  color: foundations.color(neutralLight);
-  font-family: "CircularXXWeb-Bold", "Helvetica", "Arial", sans-serif;
-  font-feature-settings: "ss08" on;
-  font-size: 2rem;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-variant-ligatures: none;
-  text-rendering: optimizeLegibility;
-
-  @include foundations.mq(small) {
-    background-color: foundations.color(actionBase);
-  }
-
-  @include foundations.mq(medium, large) {
-    background-color: foundations.color(errorBase);
-  }
-}
-
