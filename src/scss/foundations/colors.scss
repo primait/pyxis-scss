@@ -103,7 +103,7 @@ $_gradients: (
  * @access public
  */
 @function color($color) {
-  @return lib.mapGetOrDie($_colors, $color);
+  @return lib.getOrDie($_colors, $color);
 }
 
 /**
@@ -116,7 +116,7 @@ $_gradients: (
  * @access public
  */
 @function gradient($gradient) {
-  @return lib.mapGetOrDie($_gradients, $gradient);
+  @return lib.getOrDie($_gradients, $gradient);
 }
 
 /**

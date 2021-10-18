@@ -1,0 +1,67 @@
+@use "../lib";
+
+$_breakpointBase: 1px;
+$_breakpointXxsmall: 375px;
+$_breakpointXsmall: 576px;
+$_breakpointSmall: 768px;
+$_breakpointMedium: 992px;
+$_breakpointLarge: 1200px;
+$_breakpointXlarge: 1920px;
+
+/**
+ * The breakpoints of Pyxis
+ *
+ * @type Map
+ * @access private
+ */
+$_breakpoints: (
+  base: $_breakpointBase,
+  xxsmall: $_breakpointXxsmall,
+  xsmall: $_breakpointXsmall,
+  small: $_breakpointSmall,
+  medium: $_breakpointMedium,
+  large: $_breakpointLarge,
+  xlarge: $_breakpointXlarge
+);
+
+/**
+ * Breakpoint bounding difference
+ *
+ * @type Value
+ * @access private
+ */
+$_boundDiff: 1px;
+
+/**
+ * Returns the $breakpoint value from map $breakpoints
+ *
+ * @param {String} $breakpoint - Name of breakpoint
+ * @return {Value} Representation of breakpoint
+ * @throws {Error}
+ *
+ * @access public
+ */
+@function breakpoint($breakpoint) {
+  @return lib.getOrDie($_breakpoints, $breakpoint);
+}
+
+/**
+ * Wraps @content inside a media-query with a min-width and max-width (optional)
+ *
+ * @param {String} $from - Name of breakpoint
+ * @param {String | Null} $until - Name of breakpoint
+ * @throws {Error}
+ *
+ * @access public
+ */
+@mixin mq($from, $until: null) {
+  $mediaQuery: "screen and (min-width: #{breakpoint($from)})";
+
+  @if $until {
+    $mediaQuery: "#{$mediaQuery} and (max-width: #{breakpoint($until) - $_boundDiff})";
+  }
+
+  @media #{$mediaQuery} {
+    @content;
+  }
+}
