@@ -1,62 +1,59 @@
-// Webpack uses this to work with directories
-const path = require('path');
-const StylelintPlugin = require('stylelint-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const StylelintPlugin = require("stylelint-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const stylelintOptions = {
-  configFile: '.stylelintrc',
-  context: 'scss',
+  configFile: ".stylelintrc",
+  context: "scss",
   emitError: true,
   emitWarning: true,
   failOnWarning: true,
   ignoreDisables: true,
-  syntax: 'scss',
-}
+  syntax: "scss",
+};
+
+const sassOptions = {
+  implementation: require("sass"),
+  sassOptions: {
+    outputStyle: "compressed",
+    sourceMap: false,
+  },
+};
 
 module.exports = {
-  context: path.resolve(__dirname, 'src'),
+  context: path.resolve(__dirname, "src"),
   entry: {
-    pyxis: './pyxis.js'
+    pyxis: "./pyxis.js",
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
-    filename: '[name].bundle.js'
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
+    filename: "[name].js",
   },
   mode: "development",
   module: {
     rules: [
       {
         test: /\.(sa|sc|c)ss$/,
-        include: path.resolve(__dirname, 'src', 'scss'),
+        include: path.resolve(__dirname, "src", "scss"),
         use: [
-          {
-            loader: "css-loader",
-          },
-          {
-            loader: "postcss-loader"
-          },
-          {
-            loader: "sass-loader",
-            options: {
-              implementation: require("sass"),
-            }
-          }
-        ]
+          { loader: MiniCssExtractPlugin.loader },
+          { loader: "css-loader" },
+          { loader: "postcss-loader" },
+          { loader: "sass-loader", options: sassOptions },
+        ],
       },
       {
         test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
-        type: 'asset/resource',
-      }
-    ]
+        type: "asset/resource",
+      },
+    ],
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new StylelintPlugin(stylelintOptions),
-  ],
+  plugins: [new CleanWebpackPlugin(), new MiniCssExtractPlugin(), new StylelintPlugin(stylelintOptions)],
   devServer: {
     static: {
-      directory: path.join(__dirname, './'),
+      directory: path.join(__dirname, "./"),
     },
     compress: true,
     port: 8080,

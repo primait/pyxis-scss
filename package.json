@@ -1,10 +1,10 @@
 {
   "name": "pyxis-scss",
   "version": "0.0.1",
-  "description": "Pyxis foundations and components in HTML and SCSS.",
-  "main": "src/index.js",
+  "description": "Pyxis is the Prima Assicurazioni's design system.",
+  "main": "src/scss/pyxis.scss",
   "repository": "git@github.com:primait/pyxis-scss.git",
-  "author": "pyxis-scss mantainers can be found here: https://github.com/primait/pyxis-scss",
+  "author": "Prima Assicurazioni",
   "license": "ISC",
   "private": false,
   "scripts": {
@@ -19,6 +19,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.3.0",
     "cssnano": "^5.0.8",
+    "mini-css-extract-plugin": "^2.4.2",
     "postcss": "^8.3.9",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-loader": "^6.1.1",
