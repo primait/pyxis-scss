@@ -1,3 +1,7 @@
+@use "../lib";
+@use "breakpoints";
+@use "fontSizeRoot";
+
 /**
  * Physical address of the fonts-containing folder
  * @type String
@@ -23,7 +27,7 @@ $_fontFamilyWithFallback: $_fontFamily, "Arial", sans-serif;
 
 /**
  * Font feature settings for Circular font
- * The "ss08" setting allows high numbers to be rendered as capital letters
+ * The "ss08" setting allows to make numbers tall as uppercase letters
  *
  * @type List
  * @access private
@@ -64,7 +68,7 @@ $_fontWeights: (
   light: $_fontWeightLight,
   book: $_fontWeightBook,
   bold: $_fontWeightBold,
-) !default;
+);
 
 /**
  * The map of fonts and font-weight available in Pyxis
@@ -85,15 +89,112 @@ $_fonts: (
     fileName: "CircularXXWeb-Bold",
     weight: $_fontWeightBold
   ),
-) !default;
+);
 
 /**
- * Font size root
+ + Responsive title map
  *
- * @type Number
- * @access public
+ * @type Map
+ * @access private
  */
-$fontSizeRoot: 16px;
+$_titleFontSize: (
+  xl: (
+    base: (
+      fontSize: 28px,
+      lineHeight: 42px
+    ),
+    small: (
+      fontSize: 32px,
+      lineHeight: 50px
+    ),
+    large: (
+      fontSize: 40px,
+      lineHeight: 60px
+    )
+  ),
+  l: (
+    base: (
+      fontSize: 24px,
+      lineHeight: 38px
+    ),
+    small: (
+      fontSize: 26px,
+      lineHeight: 42px
+    ),
+    large: (
+      fontSize: 32px,
+      lineHeight: 50px
+    )
+  ),
+  m: (
+    base: (
+      fontSize: 20px,
+      lineHeight: 32px
+    ),
+    small: (
+      fontSize: 22px,
+      lineHeight: 34px
+    ),
+    large: (
+      fontSize: 24px,
+      lineHeight: 38px
+    )
+  ),
+  s: (
+    base: (
+      fontSize: 16px,
+      lineHeight: 26px
+    ),
+    small: (
+      fontSize: 18px,
+      lineHeight: 28px
+    ),
+    large: (
+      fontSize: 20px,
+      lineHeight: 32px
+    )
+  ),
+);
+
+/**
+ * Responsive text map
+ *
+ * @type Map
+ * @access private
+ */
+$_textFontSize: (
+  l: (
+    base: (
+      fontSize: 14px,
+      lineHeight: 22px,
+      letterSpacing: 0.1px,
+    ),
+    small: (
+      fontSize: 16px,
+      lineHeight: 26px,
+      letterSpacing: 0.1px,
+    ),
+  ),
+  m: (
+    base: (
+      fontSize: 12px,
+      lineHeight: 20px,
+      letterSpacing: 0.3px,
+    ),
+    small: (
+      fontSize: 14px,
+      lineHeight: 22px,
+      letterSpacing: 0.1px,
+    ),
+  ),
+  s: (
+    base: (
+      fontSize: 12px,
+      lineHeight: 20px,
+      letterSpacing: 0.3px,
+    ),
+  ),
+);
 
 /**
  * Base setting for Pyxis typography
@@ -103,7 +204,7 @@ $fontSizeRoot: 16px;
 @mixin typographySetting() {
   font-family: $_fontFamilyWithFallback;
   font-feature-settings: $_fontFeatureSettings;
-  font-size: $fontSizeRoot;
+  font-size: fontSizeRoot.$fontSizeRoot;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-variant-ligatures: none;
@@ -117,10 +218,66 @@ $fontSizeRoot: 16px;
  * @access public
  */
 @mixin fontWeight($weight) {
-  @if not map-has-key($_fontWeights, $weight) {
-    @error "Unknown key `#{$weight}` in map `$_fonts`";
+  font-weight: #{lib.getOrDie($_fonts, $weight, weight)};
+}
+
+/**
+ * Include the responsive title size by name available in $_titleFontSize
+ *
+ * @access public
+ */
+@mixin title($size) {
+  @each $breakpointName, $titleMap in lib.getOrDie($_titleFontSize, $size) {
+    @if $breakpointName == base {
+      font-size: lib.rem(lib.getOrDie($titleMap, fontSize));
+      line-height: lib.rem(lib.getOrDie($titleMap, lineHeight));
+    } @else {
+      @include breakpoints.mq($breakpointName) {
+        font-size: lib.rem(lib.getOrDie($titleMap, fontSize));
+        line-height: lib.rem(lib.getOrDie($titleMap, lineHeight));
+      }
+    }
   }
-  font-weight: #{map-get($_fonts, $weight, weight)};
+}
+
+/**
+ * Include the responsive text size by name available in $_textFontSize
+ *
+ * @access public
+ */
+@mixin text($size) {
+  @each $breakpointName, $textMap in lib.getOrDie($_textFontSize, $size) {
+    @if $breakpointName == base {
+      font-size: lib.rem(lib.getOrDie($textMap, fontSize));
+      letter-spacing: lib.rem(lib.getOrDie($textMap, letterSpacing));
+      line-height: lib.rem(lib.getOrDie($textMap, lineHeight));
+    } @else {
+      @include breakpoints.mq($breakpointName) {
+        font-size: lib.rem(lib.getOrDie($textMap, fontSize));
+        letter-spacing: lib.rem(lib.getOrDie($textMap, letterSpacing));
+        line-height: lib.rem(lib.getOrDie($textMap, lineHeight));
+      }
+    }
+  }
+}
+
+/**
+ * Create atom classes for all title and text variant in $_titleFontSize map and $_textFontSize map
+ *
+ * @access public
+ */
+@mixin createTypographyAtoms() {
+  @each $titleName, $titleMap in $_titleFontSize {
+    .title-#{lib.camelToKebabCase($titleName)} {
+      @include title($titleName);
+    }
+  }
+
+  @each $textName, $textMap in $_textFontSize {
+    .text-#{lib.camelToKebabCase($textName)} {
+      @include text($textName);
+    }
+  }
 }
 
 /**
@@ -137,4 +294,3 @@ $fontSizeRoot: 16px;
       url("#{$fontPath}/#{map-get($font, fileName)}.woff2") format("woff2");
   }
 }
-

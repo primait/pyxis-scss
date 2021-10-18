@@ -1,0 +1,22 @@
+@use "sass:math";
+@use "../foundations/fontSizeRoot";
+
+/*
+ * Convert pixels to rem
+ *
+ * The $fontSizeRoot (defined in foundations/_typography.scss)
+ * must be configured to match the font-size of your root (html) element
+ *
+ * @param {Number} $value - Length in pixels
+ * @return {Number} Length in rems
+ *
+ * @access public
+ */
+
+@function rem($value) {
+  @if (unitless($value)) {
+    $value: $value * 1px;
+  }
+
+  @return math.div($value, fontSizeRoot.$fontSizeRoot) * 1rem;
+}

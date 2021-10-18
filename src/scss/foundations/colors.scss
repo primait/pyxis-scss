@@ -1,4 +1,3 @@
-@use "sass:color";
 @use "../lib";
 
 $_colorActionBase: #067f96;
@@ -120,11 +119,11 @@ $_gradients: (
 }
 
 /**
- * Create atom classes for all colors variant in $_colors map.
+ * Create atom classes for all colors and gradient in $_colors map and $_gradients map
  *
  * @access public
  */
-@mixin createAtoms() {
+@mixin createColorAtoms() {
   @each $colorName, $colorValue in $_colors {
     .bg-#{lib.camelToKebabCase($colorName)} {
       background-color: $colorValue;

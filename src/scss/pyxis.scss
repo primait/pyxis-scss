@@ -15,7 +15,6 @@ html {
 }
 
 body {
-  @include foundations.fontWeight(bold);
   background-color: foundations.color(neutralBase);
   color: foundations.color(neutralLight);
 }
