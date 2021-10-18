@@ -1,6 +1,7 @@
 @use "../lib";
 
 $_breakpointBase: 1px;
+$_breakpointXxsmall: 375px;
 $_breakpointXsmall: 576px;
 $_breakpointSmall: 768px;
 $_breakpointMedium: 992px;
@@ -15,6 +16,7 @@ $_breakpointXlarge: 1920px;
  */
 $_breakpoints: (
   base: $_breakpointBase,
+  xxsmall: $_breakpointXxsmall,
   xsmall: $_breakpointXsmall,
   small: $_breakpointSmall,
   medium: $_breakpointMedium,
@@ -28,7 +30,7 @@ $_breakpoints: (
  * @type Value
  * @access private
  */
-$_breakpointBoundDiff: 1px;
+$_boundDiff: 1px;
 
 /**
  * Returns the $breakpoint value from map $breakpoints
@@ -40,7 +42,7 @@ $_breakpointBoundDiff: 1px;
  * @access public
  */
 @function breakpoint($breakpoint) {
-  @return lib.mapGetOrDie($_breakpoints, $breakpoint);
+  @return lib.getOrDie($_breakpoints, $breakpoint);
 }
 
 /**
@@ -56,7 +58,7 @@ $_breakpointBoundDiff: 1px;
   $mediaQuery: "screen and (min-width: #{breakpoint($from)})";
 
   @if $until {
-    $mediaQuery: "#{$mediaQuery} and (max-width: #{breakpoint($until) - $_breakpointBoundDiff})";
+    $mediaQuery: "#{$mediaQuery} and (max-width: #{breakpoint($until) - $_boundDiff})";
   }
 
   @media #{$mediaQuery} {
