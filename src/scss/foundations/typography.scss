@@ -329,14 +329,18 @@ $_lineHeightRatio: (
  */
 @mixin createTypographyAtoms() {
   @each $titleName, $titleMap in $_titleFontSize {
-    .title-#{lib.camelToKebabCase($titleName)} {
-      @include title($titleName);
+    @each $weightName in $_titleFontWeight {
+      .title-#{lib.camelToKebabCase($titleName)}--#{$weightName} {
+        @include title($titleName, $weightName);
+      }
     }
   }
 
   @each $textName, $textMap in $_textFontSize {
-    .text-#{lib.camelToKebabCase($textName)} {
-      @include text($textName);
+    @each $weightName, $weightValue in $_fontWeights {
+      .text-#{lib.camelToKebabCase($textName)}--#{$weightName} {
+        @include text($textName, $weightName);
+      }
     }
   }
 }
