@@ -101,57 +101,45 @@ $_titleFontSize: (
   xl: (
     base: (
       fontSize: 28px,
-      lineHeight: 42px
     ),
     small: (
       fontSize: 32px,
-      lineHeight: 48px
     ),
     large: (
       fontSize: 40px,
-      lineHeight: 60px
     )
   ),
   l: (
     base: (
       fontSize: 24px,
-      lineHeight: 38px
     ),
     small: (
       fontSize: 26px,
-      lineHeight: 42px
     ),
     large: (
       fontSize: 32px,
-      lineHeight: 50px
     )
   ),
   m: (
     base: (
       fontSize: 20px,
-      lineHeight: 32px
     ),
     small: (
       fontSize: 22px,
-      lineHeight: 34px
     ),
     large: (
       fontSize: 24px,
-      lineHeight: 38px
     )
   ),
   s: (
     base: (
       fontSize: 16px,
-      lineHeight: 26px
     ),
     small: (
       fontSize: 18px,
-      lineHeight: 28px
     ),
     large: (
       fontSize: 20px,
-      lineHeight: 32px
     )
   ),
 );
@@ -174,31 +162,26 @@ $_textFontSize: (
   l: (
     base: (
       fontSize: 14px,
-      lineHeight: 22px,
       letterSpacing: 0.1px,
     ),
     small: (
       fontSize: 16px,
-      lineHeight: 26px,
       letterSpacing: 0.1px,
     ),
   ),
   m: (
     base: (
       fontSize: 12px,
-      lineHeight: 20px,
       letterSpacing: 0.3px,
     ),
     small: (
       fontSize: 14px,
-      lineHeight: 22px,
       letterSpacing: 0.1px,
     ),
   ),
   s: (
     base: (
       fontSize: 12px,
-      lineHeight: 20px,
       letterSpacing: 0.3px,
     ),
   ),
