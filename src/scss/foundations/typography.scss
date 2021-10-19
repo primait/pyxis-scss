@@ -1,6 +1,6 @@
 @use "../lib";
 @use "breakpoints";
-@use "fontSizeRoot";
+@use "global";
 
 /**
  * Physical address of the fonts-containing folder
@@ -204,7 +204,7 @@ $_textFontSize: (
 @mixin typographySetting() {
   font-family: $_fontFamilyWithFallback;
   font-feature-settings: $_fontFeatureSettings;
-  font-size: fontSizeRoot.$fontSizeRoot;
+  font-size: global.$fontSizeRoot;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-variant-ligatures: none;
