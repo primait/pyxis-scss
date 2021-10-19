@@ -13,8 +13,3 @@
 html {
   @include foundations.typographySetting();
 }
-
-body {
-  background-color: foundations.color(neutralBase);
-  color: foundations.color(neutralLight);
-}

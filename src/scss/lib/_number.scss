@@ -8,11 +8,10 @@
  * must be configured to match the font-size of your root (html) element
  *
  * @param {Number} $value - Length in pixels
- * @return {Number} Length in rems
+ * @return {Number} - Length in rems
  *
  * @access public
  */
-
 @function rem($value) {
   @if (unitless($value)) {
     $value: $value * 1px;
@@ -20,3 +19,22 @@
 
   @return math.div($value, global.$fontSizeRoot) * 1rem;
 }
+
+/*
+ * Strips the unit from a $number
+ *
+ * @param {Number} $number - Number to remove unit from
+ * @return {Number} - Unitless number
+ * @throws {Warn}
+ *
+ * @access public
+ */
+@function stripUnit($number) {
+  @if type-of($number) == "number" and not unitless($number) {
+    @return math.div($number, ($number * 0 + 1));
+  } @else {
+    @error "Cannot strip the unit from #{$number}.";
+  }
+}
+
+

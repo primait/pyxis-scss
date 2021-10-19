@@ -7,7 +7,7 @@
  * @type String
  * @access public
  */
-$fontPath: "../fonts" !default;
+$fontPath: "../assets/fonts" !default;
 
 /**
  * Name of Pyxis base font-family
@@ -105,7 +105,7 @@ $_titleFontSize: (
     ),
     small: (
       fontSize: 32px,
-      lineHeight: 50px
+      lineHeight: 48px
     ),
     large: (
       fontSize: 40px,
@@ -157,6 +157,14 @@ $_titleFontSize: (
 );
 
 /**
+ * Font weights permitted in title
+ *
+ * @type Map
+ * @access private
+ */
+$_titleFontWeight: (book, bold);
+
+/**
  * Responsive text map
  *
  * @type Map
@@ -197,6 +205,80 @@ $_textFontSize: (
 );
 
 /**
+ * The ratios to apply to line-heights
+ *
+ * @type Map
+ * @access private
+ */
+$_lineHeightRatio: (
+  base: (
+    ratio: 1.5,
+    from: 32,
+  ),
+  golden: (
+    from: 0,
+    ratio: 1.618,
+  )
+);
+
+/**
+ * Includes the properties contained in the typography map
+ *
+ * @param {Map} $map - The map of fontSize
+ * @throws {Error}
+ *
+ * @access private
+ */
+@mixin _typographySize($map) {
+  $fontSize: lib.getOrDie($map, fontSize);
+
+  font-size: lib.rem($fontSize);
+  line-height: _lineHeight($fontSize);
+
+  @if(map-has-key($map, letterSpacing)) {
+    letter-spacing: lib.rem(lib.getOrDie($map, letterSpacing));
+  }
+}
+
+/**
+ * Includes the properties contained in the typography map in every breakpoints
+ *
+ * @param {Map} $map - The map of fontSize
+ * @param {String} $size - Name of the $size
+ * @throws {Error}
+ *
+ * @access private
+ */
+@mixin _responsiveTypographySize($map, $size) {
+  @each $breakpoint, $map in lib.getOrDie($map, $size) {
+    @if $breakpoint == base {
+      @include _typographySize($map);
+    } @else {
+      @include breakpoints.mq($breakpoint) {
+        @include _typographySize($map);
+      }
+    }
+  }
+}
+
+/*
+ * Returns a line-height of $fontSize
+ *
+ * @param {Number} $fontSize - The font-size to apply the line-height to
+ * @return {Number} - A line-height represented in percentage
+ * @throws {Error}
+ *
+ * @access private
+ */
+@function _lineHeight($fontSize) {
+  @each $name, $map in lib.getOrDie($_lineHeightRatio) {
+    @if(lib.stripUnit($fontSize) >= lib.getOrDie($map, from)) {
+      @return lib.getOrDie($map, ratio) * 100%;
+    }
+  }
+}
+
+/**
  * Base setting for Pyxis typography
  *
  * @access public
@@ -215,6 +297,9 @@ $_textFontSize: (
 /**
  * Include the font-weight by name available in $_fontWeights
  *
+ * @param {String} $weight - The name of the weight
+ * @throws {Error}
+ *
  * @access public
  */
 @mixin fontWeight($weight) {
@@ -224,41 +309,34 @@ $_textFontSize: (
 /**
  * Include the responsive title size by name available in $_titleFontSize
  *
+ * @param {String} $size - The name of the size
+ * @param {String} $weight - The name of the weight
+ * @throws {Error}
+ *
  * @access public
  */
-@mixin title($size) {
-  @each $breakpointName, $titleMap in lib.getOrDie($_titleFontSize, $size) {
-    @if $breakpointName == base {
-      font-size: lib.rem(lib.getOrDie($titleMap, fontSize));
-      line-height: lib.rem(lib.getOrDie($titleMap, lineHeight));
-    } @else {
-      @include breakpoints.mq($breakpointName) {
-        font-size: lib.rem(lib.getOrDie($titleMap, fontSize));
-        line-height: lib.rem(lib.getOrDie($titleMap, lineHeight));
-      }
-    }
+@mixin title($size, $weight: bold) {
+  @include _responsiveTypographySize($_titleFontSize, $size);
+
+  @if index($_titleFontWeight, $weight) {
+    @include fontWeight($weight);
+  } @else {
+    @error "Font-weight `#{$weight}` is not allowed in titles";
   }
 }
 
 /**
  * Include the responsive text size by name available in $_textFontSize
  *
+ * @param {String} $size - The name of the size
+ * @param {String} $weight - The name of the weight
+ * @throws {Error}
+ *
  * @access public
  */
-@mixin text($size) {
-  @each $breakpointName, $textMap in lib.getOrDie($_textFontSize, $size) {
-    @if $breakpointName == base {
-      font-size: lib.rem(lib.getOrDie($textMap, fontSize));
-      letter-spacing: lib.rem(lib.getOrDie($textMap, letterSpacing));
-      line-height: lib.rem(lib.getOrDie($textMap, lineHeight));
-    } @else {
-      @include breakpoints.mq($breakpointName) {
-        font-size: lib.rem(lib.getOrDie($textMap, fontSize));
-        letter-spacing: lib.rem(lib.getOrDie($textMap, letterSpacing));
-        line-height: lib.rem(lib.getOrDie($textMap, lineHeight));
-      }
-    }
-  }
+@mixin text($size, $weight: book) {
+  @include _responsiveTypographySize($_textFontSize, $size);
+  @include fontWeight($weight);
 }
 
 /**
@@ -285,7 +363,7 @@ $_textFontSize: (
  */
 @each $name, $font in $_fonts {
   @font-face {
-    font-display: swap;
+    font-display: fallback;
     font-family: $_fontFamily;
     font-style: normal;
     font-weight: #{map-get($font, weight)};
