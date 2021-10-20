@@ -1,4 +1,4 @@
 @forward "breakpoints";
-@forward "colors";
+@forward "colors" hide createAtoms;
 @forward "global";
-@forward "typography";
+@forward "typography" hide createAtoms;

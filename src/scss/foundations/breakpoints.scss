@@ -46,6 +46,19 @@ $_boundDiff: 1px;
 }
 
 /**
+ * Check if the breakpoint is "base"
+ *
+ * @param {String} $breakpoint - Name of breakpoint
+ * @return {Boolean}
+ * @throws {Error}
+ *
+ * @access public
+ */
+@function isBase($breakpoint) {
+  @return $breakpoint == base;
+}
+
+/**
  * Wraps @content inside a media-query with a min-width and max-width (optional)
  *
  * @param {String} $from - Name of breakpoint
@@ -57,11 +70,14 @@ $_boundDiff: 1px;
 @mixin mq($from, $until: null) {
   $mediaQuery: "screen and (min-width: #{breakpoint($from)})";
 
-  @if $until {
-    $mediaQuery: "#{$mediaQuery} and (max-width: #{breakpoint($until) - $_boundDiff})";
-  }
-
-  @media #{$mediaQuery} {
+  @if isBase($from) and lib.isNull($until) {
     @content;
+  } @else {
+    @if $until {
+      $mediaQuery: "#{$mediaQuery} and (max-width: #{breakpoint($until) - $_boundDiff})";
+    }
+    @media #{$mediaQuery} {
+      @content;
+    }
   }
 }

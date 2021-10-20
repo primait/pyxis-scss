@@ -1,0 +1,29 @@
+/**
+ * Responsive text map
+ * The first key is the name of size (l, m, s)
+ * The second key is breakpoint (base, small)
+ *
+ * @type Map
+ * @access public
+ */
+$fontSizes: (
+  l: (
+    base: 14px,
+    small: 16px,
+  ),
+  m: (
+    base: 12px,
+    small: 14px,
+  ),
+  s: (
+    base: 12px,
+  )
+);
+
+/**
+ * Font weights permitted in text
+ *
+ * @type List
+ * @access public
+ */
+$allowedFontWeights: (light, book, bold);

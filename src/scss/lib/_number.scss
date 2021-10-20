@@ -1,7 +1,7 @@
 @use "sass:math";
 @use "../foundations/global";
 
-/*
+/**
  * Convert pixels to rem
  *
  * The $fontSizeRoot (defined in foundations/_typography.scss)
@@ -20,7 +20,7 @@
   @return math.div($value, global.$fontSizeRoot) * 1rem;
 }
 
-/*
+/**
  * Strips the unit from a $number
  *
  * @param {Number} $number - Number to remove unit from

@@ -31,6 +31,18 @@
 }
 
 /**
+ * Capitalize string
+ *
+ * @param {String} $string - Initial string
+ * @return {String} - Capitalized string
+ *
+ * @access public
+ */
+@function capitalize($string) {
+  @return to-upper-case(str-slice($string, 1, 1)) + str-slice($string, 2);
+}
+
+/**
  * Replace `$search` with `$replace` in `$string`
  *
  * @param {String} $string - Initial string

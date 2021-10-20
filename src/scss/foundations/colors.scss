@@ -123,7 +123,7 @@ $_gradients: (
  *
  * @access public
  */
-@mixin createColorAtoms() {
+@mixin createAtoms() {
   @each $colorName, $colorValue in $_colors {
     .bg-#{lib.camelToKebabCase($colorName)} {
       background-color: $colorValue;

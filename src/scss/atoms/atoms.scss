@@ -1,5 +1,5 @@
 @use "../foundations/colors";
 @use "../foundations/typography";
 
-@include colors.createColorAtoms();
-@include typography.createTypographyAtoms();
+@include colors.createAtoms();
+@include typography.createAtoms();
