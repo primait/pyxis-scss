@@ -11,5 +11,5 @@
 @forward "foundations";
 
 html {
-  @include foundations.typographySetting();
+  @include foundations.typographyGlobalSettings();
 }

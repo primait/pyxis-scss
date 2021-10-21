@@ -1,6 +1,6 @@
 @use "../../lib";
 @use "../breakpoints";
-@use "../global";
+@use "../globals";
 @use "text";
 @use "title";
 
@@ -10,7 +10,7 @@
  * @type String
  * @access public
  */
-$fontPath: "../assets/fonts" !default;
+$_fontPath: "../assets/fonts";
 
 /**
  * Font display settings
@@ -18,7 +18,7 @@ $fontPath: "../assets/fonts" !default;
  * @type String
  * @access public
  */
-$fontDisplay: swap !default;
+$_fontDisplay: swap;
 
 /**
  * The font setting map
@@ -119,6 +119,23 @@ $_letterSpacing: (
 }
 
 /**
+ * Base setting for Pyxis typography
+ * To be used only in the html tag
+ *
+ * @access public
+ */
+@mixin typographyGlobalSettings() {
+  @include _fontWeight(book);
+  font-family: _fontFamily($_font);
+  font-feature-settings: lib.getOrDie($_font, featureSettings);
+  font-size: globals.$fontSizeRoot;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-variant-ligatures: none;
+  text-rendering: optimizeLegibility;
+}
+
+/**
  * Include the font-weight value by name
  *
  * @param {String} $weight - The name of the weight
@@ -139,7 +156,7 @@ $_letterSpacing: (
  *
  * @access private
  */
-@mixin _responsiveTypographySize($fontSizes, $size) {
+@mixin _size($fontSizes, $size) {
   @each $breakpoint, $value in lib.getOrDie($fontSizes, $size) {
     @include breakpoints.mq($breakpoint) {
       $fontSize: lib.getOrDie($fontSizes, $size, $breakpoint);
@@ -160,8 +177,8 @@ $_letterSpacing: (
  *
  * @access public
  */
-@mixin title($size, $weight: bold) {
-  @include _responsiveTypographySize(title.$fontSizes, $size);
+@mixin title($size, $weight) {
+  @include _size(title.$fontSizes, $size);
 
   @if index(title.$allowedFontWeights, $weight) {
     @include _fontWeight($weight);
@@ -179,26 +196,30 @@ $_letterSpacing: (
  *
  * @access public
  */
-@mixin text($size, $weight: book) {
+@mixin text($size, $weight) {
   @include _fontWeight($weight);
-  @include _responsiveTypographySize(text.$fontSizes, $size);
+  @include _size(text.$fontSizes, $size);
 }
 
 /**
- * Base setting for Pyxis typography
- * To be used only in the html tag
+ * Create @font-face for all fonts available in $_fonts map
  *
  * @access public
  */
-@mixin typographySetting() {
-  @include _fontWeight(book);
-  font-family: _fontFamily($_font);
-  font-feature-settings: lib.getOrDie($_font, featureSettings);
-  font-size: global.$fontSizeRoot;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-variant-ligatures: none;
-  text-rendering: optimizeLegibility;
+@mixin fontFaces() {
+  @each $name, $weight in lib.getOrDie($_font, weights) {
+    $fileName: #{lib.getOrDie($_font, name)}-#{lib.capitalize($name)};
+
+    @font-face {
+      font-display: $_fontDisplay;
+      font-family: lib.getOrDie($_font, name);
+      font-style: normal;
+      font-weight: $weight;
+      src:
+        url("#{$_fontPath}/#{$fileName}.woff") format("woff"),
+        url("#{$_fontPath}/#{$fileName}.woff2") format("woff2");
+    }
+  }
 }
 
 /**
@@ -225,18 +246,6 @@ $_letterSpacing: (
 }
 
 /**
- * Create @font-face for all fonts available in $_fonts map
+ * Generate @font-face
  */
-@each $name, $weight in lib.getOrDie($_font, weights) {
-  $fileName: #{lib.getOrDie($_font, name)}-#{lib.capitalize($name)};
-
-  @font-face {
-    font-display: $fontDisplay;
-    font-family: lib.getOrDie($_font, name);
-    font-style: normal;
-    font-weight: $weight;
-    src:
-      url("#{$fontPath}/#{$fileName}.woff") format("woff"),
-      url("#{$fontPath}/#{$fileName}.woff2") format("woff2");
-  }
-}
+@include fontFaces();

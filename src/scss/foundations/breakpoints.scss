@@ -36,7 +36,7 @@ $_boundDiff: 1px;
  * Returns the $breakpoint value from map $breakpoints
  *
  * @param {String} $breakpoint - Name of breakpoint
- * @return {Number} Representation of breakpoint
+ * @return {Number} The min-value in which the breakpoint will be triggered
  * @throws {Error}
  *
  * @access public

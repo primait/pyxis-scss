@@ -1,5 +1,5 @@
 @use "sass:math";
-@use "../foundations/global";
+@use "../foundations/globals";
 
 /**
  * Convert pixels to rem
@@ -17,7 +17,7 @@
     $value: $value * 1px;
   }
 
-  @return math.div($value, global.$fontSizeRoot) * 1rem;
+  @return math.div($value, globals.$fontSizeRoot) * 1rem;
 }
 
 /**
