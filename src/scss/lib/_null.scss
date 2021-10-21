@@ -1,0 +1,9 @@
+/**
+ * Check if value is null
+ *
+ * @type Value
+ * @access public
+ */
+@function isNull($value) {
+  @return $value == null;
+}

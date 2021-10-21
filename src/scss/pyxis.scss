@@ -1,12 +1,15 @@
-/*
-  Pyxis foundations.
-*/
-@use "fonts";
+/**
+ * Pyxis foundations.
+ */
 @use "foundations";
 @use "atoms";
 
-/*
-  Exposed methods and variables to be used in your SCSS source code. 
-  Check each module implementation to be aware of what is exposed.
-*/
+/**
+ * Exposed methods and variables to be used in your SCSS source code.
+ * Check each module implementation to be aware of what is exposed.
+ */
 @forward "foundations";
+
+html {
+  @include foundations.typographyGlobalSettings();
+}

@@ -36,13 +36,26 @@ $_boundDiff: 1px;
  * Returns the $breakpoint value from map $breakpoints
  *
  * @param {String} $breakpoint - Name of breakpoint
- * @return {Value} Representation of breakpoint
+ * @return {Number} The min-value in which the breakpoint will be triggered
  * @throws {Error}
  *
  * @access public
  */
 @function breakpoint($breakpoint) {
   @return lib.getOrDie($_breakpoints, $breakpoint);
+}
+
+/**
+ * Check if the breakpoint is "base"
+ *
+ * @param {String} $breakpoint - Name of breakpoint
+ * @return {Boolean}
+ * @throws {Error}
+ *
+ * @access public
+ */
+@function isBase($breakpoint) {
+  @return $breakpoint == base;
 }
 
 /**
@@ -57,11 +70,14 @@ $_boundDiff: 1px;
 @mixin mq($from, $until: null) {
   $mediaQuery: "screen and (min-width: #{breakpoint($from)})";
 
-  @if $until {
-    $mediaQuery: "#{$mediaQuery} and (max-width: #{breakpoint($until) - $_boundDiff})";
-  }
-
-  @media #{$mediaQuery} {
+  @if isBase($from) and lib.isNull($until) {
     @content;
+  } @else {
+    @if $until {
+      $mediaQuery: "#{$mediaQuery} and (max-width: #{breakpoint($until) - $_boundDiff})";
+    }
+    @media #{$mediaQuery} {
+      @content;
+    }
   }
 }
