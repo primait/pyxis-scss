@@ -21,7 +21,7 @@ $fontPath: "../assets/fonts" !default;
 $fontDisplay: swap !default;
 
 /**
- * The map of fonts settings
+ * The font setting map
  * The "ss08" featureSettings allows to make numbers tall as uppercase letters
  *
  * @type Map
@@ -55,7 +55,7 @@ $_lineHeight: (
  * @type Map
  * @access private
  */
-$_letterSpacings: (
+$_letterSpacing: (
   base: 0,
   small: 0.1px,
   medium: 0.3px,
@@ -107,13 +107,13 @@ $_letterSpacings: (
   $smallLetterSpacingFrom: 14;
   $baseLetterSpacingFrom: 16;
 
-  @if(lib.stripUnit($fontSize) > $baseLetterSpacingFrom) {
-    @return lib.rem(lib.getOrDie($_letterSpacings, base));
+  @if(lib.stripUnit($fontSize) >= $baseLetterSpacingFrom) {
+    @return lib.rem(lib.getOrDie($_letterSpacing, base));
   } @else {
     @return if(
       lib.stripUnit($fontSize) >= $smallLetterSpacingFrom,
-      lib.rem(lib.getOrDie($_letterSpacings, small)),
-      lib.rem(lib.getOrDie($_letterSpacings, medium))
+      lib.rem(lib.getOrDie($_letterSpacing, small)),
+      lib.rem(lib.getOrDie($_letterSpacing, medium))
     );
   }
 }
