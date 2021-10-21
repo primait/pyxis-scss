@@ -85,10 +85,10 @@ $_letterSpacing: (
  * @access private
  */
 @function _lineHeight($fontSize) {
-  $baseLineHeightFrom: 32;
+  $shouldUseBaseLineHeight: lib.stripUnit($fontSize) >= 32;
 
   @return if(
-    lib.stripUnit($fontSize) >= $baseLineHeightFrom,
+    $shouldUseBaseLineHeight,
     lib.getOrDie($_lineHeight, base),
     lib.getOrDie($_lineHeight, golden)
   );
@@ -104,14 +104,14 @@ $_letterSpacing: (
  * @access private
  */
 @function _letterSpacing($fontSize) {
-  $smallLetterSpacingFrom: 14;
-  $baseLetterSpacingFrom: 16;
+  $shouldUseBaseLetterSpacing: lib.stripUnit($fontSize) >= 16;
+  $shouldUseSmallLetterSpacing: lib.stripUnit($fontSize) >= 14;
 
-  @if(lib.stripUnit($fontSize) >= $baseLetterSpacingFrom) {
+  @if($shouldUseBaseLetterSpacing) {
     @return lib.rem(lib.getOrDie($_letterSpacing, base));
   } @else {
     @return if(
-      lib.stripUnit($fontSize) >= $smallLetterSpacingFrom,
+      $shouldUseSmallLetterSpacing,
       lib.rem(lib.getOrDie($_letterSpacing, small)),
       lib.rem(lib.getOrDie($_letterSpacing, medium))
     );
