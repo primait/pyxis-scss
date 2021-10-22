@@ -1,6 +1,6 @@
 {
   "name": "pyxis-scss",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Pyxis is the Prima Assicurazioni's design system.",
   "main": "src/scss/pyxis.scss",
   "repository": "git@github.com:primait/pyxis-scss.git",
@@ -10,7 +10,7 @@
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "lint": "stylelint \"src/scss/**/*.scss\"",
-    "lint:autofix": "stylelint \"src/scss/**/*.scss\" --fix",
+    "lint:fix": "stylelint \"src/scss/**/*.scss\" --fix",
     "serve": "webpack serve"
   },
   "dependencies": {},

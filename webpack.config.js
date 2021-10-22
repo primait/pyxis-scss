@@ -24,7 +24,7 @@ const sassOptions = {
 module.exports = {
   context: path.resolve(__dirname, "src"),
   entry: {
-    pyxis: "./pyxis.js",
+    pyxis: "./pyxis.js"
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -57,5 +57,7 @@ module.exports = {
     },
     compress: true,
     port: 8080,
+    
   },
+  watch: true,
 };
