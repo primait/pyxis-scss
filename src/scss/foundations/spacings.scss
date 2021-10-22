@@ -1,0 +1,104 @@
+@use "../lib";
+@use "breakpoints";
+
+/**
+ * Responsive spacing map
+ * The first key is the name of size (xl, l, m, s)
+ * The second key is breakpoint (base, small, medium, large, xlarge)
+ *
+ * @type Map
+ * @access public
+ */
+$_spacings: (
+  xxxl: (
+    base: 50px,
+    medium: 60px,
+    large: 100px,
+    xlarge: 120px,
+  ),
+  xxl: (
+    base: 40px,
+    medium: 50px,
+    large: 80px,
+  ),
+  xl: (
+    base: 35px,
+    medium: 40px,
+    large: 60px,
+  ),
+  l: (
+    base: 30px,
+    medium: 35px,
+    large: 40px,
+  ),
+  m: (
+    base: 25px,
+    medium: 30px,
+  ),
+  s: (
+    base: 20px,
+  ),
+  xs: (
+    base: 15px,
+  ),
+  xxs: (
+    base: 10px,
+  ),
+  xxxs: (
+    base: 5,
+  ),
+);
+
+/**
+ * Includes the properties contained in the spacings map in every breakpoints
+ *
+ * @param {String} $size - Name of the size
+ * @param {String} $breakpoint - Name of the breakpoint
+ * @throws {Error}
+ *
+ * @access private
+ */
+@function _spacing($size, $breakpoint) {
+  @return lib.getOrDie($_spacings, $size, $breakpoint);
+}
+
+/**
+ * Includes the padding by name contained in the spacings map in every breakpoints
+ *
+ * @param {String} $size - Name of the size
+ * @throws {Error}
+ *
+ * @access public
+ */
+@mixin inset($size) {
+  @each $breakpoint, $space in lib.getOrDie($_spacings, $size) {
+    @include breakpoints.mq($breakpoint) {
+      padding: lib.rem($space);
+    }
+  }
+}
+
+/**
+ * Includes the padding by name contained in the spacings map in every breakpoints
+ *
+ * @param {String} $size - Name of the size
+ * @throws {Error}
+ *
+ * @access public
+ */
+@mixin squish($horizontalSize, $verticalSize) {
+  @each $breakpoint, $space in lib.getOrDie($_spacings, $horizontalSize) {
+    @include breakpoints.mq($breakpoint) {
+      padding-left: lib.rem($space);
+      padding-right: lib.rem($space);
+    }
+  }
+
+  @each $breakpoint, $space in lib.getOrDie($_spacings, $verticalSize) {
+    @include breakpoints.mq($breakpoint) {
+      padding-bottom: lib.rem($space);
+      padding-top: lib.rem($space);
+    }
+  }
+}
+
