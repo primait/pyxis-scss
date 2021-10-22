@@ -1,0 +1,23 @@
+/**
+ * Font size root
+ *
+ * @type Number
+ * @access public
+ */
+$fontSizeRoot: 16px !default;
+
+/**
+ * Physical address of the fonts-containing folder
+ *
+ * @type String
+ * @access public
+ */
+$fontPath: "../assets/fonts" !default;
+
+/**
+  * Font display settings
+  *
+  * @type String
+  * @access public
+  */
+$fontDisplay: swap !default;
