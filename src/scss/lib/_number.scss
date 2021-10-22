@@ -1,5 +1,5 @@
 @use "sass:math";
-@use "../foundations/globals";
+@use "../config";
 
 /**
  * Convert pixels to rem
@@ -17,7 +17,7 @@
     $value: $value * 1px;
   }
 
-  @return math.div($value, globals.$fontSizeRoot) * 1rem;
+  @return math.div($value, config.$fontSizeRoot) * 1rem;
 }
 
 /**
@@ -36,5 +36,3 @@
     @error "Cannot strip the unit from #{$number}.";
   }
 }
-
-

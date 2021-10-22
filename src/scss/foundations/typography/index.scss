@@ -1,24 +1,8 @@
+@use "../../config.scss";
 @use "../../lib";
 @use "../breakpoints";
-@use "../globals";
 @use "text";
 @use "title";
-
-/**
- * Physical address of the fonts-containing folder
- *
- * @type String
- * @access public
- */
-$_fontPath: "../assets/fonts";
-
-/**
- * Font display settings
- *
- * @type String
- * @access public
- */
-$_fontDisplay: swap;
 
 /**
  * The font setting map
@@ -29,13 +13,14 @@ $_fontDisplay: swap;
  */
 $_font: (
   name: "CircularXXWeb",
-  fallback: #{"Arial", sans-serif},
+  fallback: #{"Arial",
+  sans-serif},
   featureSettings: "ss08" on,
   weights: (
     light: 200,
     book: 400,
     bold: 700,
-  )
+  ),
 );
 
 /**
@@ -74,7 +59,6 @@ $_letterSpacing: (
   @return #{lib.getOrDie($font, name), lib.getOrDie($font, fallback)};
 }
 
-
 /**
  * Returns a line-height by $fontSize
  *
@@ -87,11 +71,7 @@ $_letterSpacing: (
 @function _lineHeight($fontSize) {
   $shouldUseBaseLineHeight: lib.stripUnit($fontSize) >= 32;
 
-  @return if(
-    $shouldUseBaseLineHeight,
-    lib.getOrDie($_lineHeight, base),
-    lib.getOrDie($_lineHeight, golden)
-  );
+  @return if($shouldUseBaseLineHeight, lib.getOrDie($_lineHeight, base), lib.getOrDie($_lineHeight, golden));
 }
 
 /**
@@ -107,7 +87,7 @@ $_letterSpacing: (
   $shouldUseBaseLetterSpacing: lib.stripUnit($fontSize) >= 16;
   $shouldUseSmallLetterSpacing: lib.stripUnit($fontSize) >= 14;
 
-  @if($shouldUseBaseLetterSpacing) {
+  @if ($shouldUseBaseLetterSpacing) {
     @return lib.rem(lib.getOrDie($_letterSpacing, base));
   } @else {
     @return if(
@@ -128,7 +108,7 @@ $_letterSpacing: (
   @include _fontWeight(book);
   font-family: _fontFamily($_font);
   font-feature-settings: lib.getOrDie($_font, featureSettings);
-  font-size: globals.$fontSizeRoot;
+  font-size: config.$fontSizeRoot;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-variant-ligatures: none;
@@ -211,13 +191,12 @@ $_letterSpacing: (
     $fileName: #{lib.getOrDie($_font, name)}-#{lib.capitalize($name)};
 
     @font-face {
-      font-display: $_fontDisplay;
+      font-display: config.$fontDisplay;
       font-family: lib.getOrDie($_font, name);
       font-style: normal;
       font-weight: $weight;
-      src:
-        url("#{$_fontPath}/#{$fileName}.woff") format("woff"),
-        url("#{$_fontPath}/#{$fileName}.woff2") format("woff2");
+      src: url("#{config.$fontPath}/#{$fileName}.woff") format("woff"),
+        url("#{config.$fontPath}/#{$fileName}.woff2") format("woff2");
     }
   }
 }

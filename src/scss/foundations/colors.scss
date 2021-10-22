@@ -1,32 +1,32 @@
 @use "../lib";
 
 $_colorActionBase: #067f96;
-$_colorActionDark: #e5f1f4;
-$_colorActionLight: #045767;
+$_colorActionDark: #045767;
+$_colorActionLight: #e5f1f4;
 
 $_colorAlertBase: #ffdc50;
-$_colorAlertDark: #fff8dc;
-$_colorAlertLight: #ffc010;
+$_colorAlertDark: #ffc010;
+$_colorAlertLight: #fff8dc;
 
 $_colorBrandBase: #8334c2;
-$_colorBrandDark: #f2eaf8;
-$_colorBrandLight: #5b2488;
+$_colorBrandDark: #5b2488;
+$_colorBrandLight: #f2eaf8;
 
 $_colorErrorBase: #df1654;
-$_colorErrorDark: #fbe7ed;
-$_colorErrorLight: #b21143;
+$_colorErrorDark: #b21143;
+$_colorErrorLight: #fbe7ed;
 
 $_colorNeutral25: #595d6a;
 $_colorNeutral50: #90939d;
 $_colorNeutral75: #c7c9cd;
 $_colorNeutral85: #dddee1;
 $_colorNeutral95: #f3f4f4;
-$_colorNeutralBase: #21283b;
 $_colorNeutralLight: #ffffff;
+$_colorNeutralBase: #21283b;
 
 $_colorSuccessBase: #1d8147;
-$_colorSuccessDark: #e8f2ec;
-$_colorSuccessLight: #145a31;
+$_colorSuccessDark: #145a31;
+$_colorSuccessLight: #e8f2ec;
 
 $_gradientAction: linear-gradient(45deg, $_colorActionBase, $_colorActionLight);
 $_gradientBrand: linear-gradient(45deg, $_colorBrandBase, $_colorBrandLight);
@@ -69,16 +69,7 @@ $_colors: (
  * @type List
  * @access private
  */
-$_textColors: (
-  actionBase,
-  alertBase,
-  brandBase,
-  errorBase,
-  neutral25,
-  neutralBase,
-  neutralLight,
-  successBase,
-);
+$_textColors: (actionBase, alertBase, brandBase, errorBase, neutral25, neutralBase, neutralLight, successBase);
 
 /**
  * The gradient palette of Pyxis
