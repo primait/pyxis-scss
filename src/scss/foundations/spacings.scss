@@ -65,7 +65,7 @@ $_spacings: (
 @mixin _spacing($size, $property, $lastChildReset: false) {
   @each $breakpoint, $space in lib.getOrDie($_spacings, $size) {
     @include breakpoints.mq($breakpoint) {
-      #{$property}: if($space == 0, $space, lib.rem($space));
+      #{$property}: lib.rem($space);
     }
   }
 
@@ -165,38 +165,35 @@ $_spacings: (
  * @access public
  */
 @mixin createAtoms() {
-  @each $space, $_ in $_spacings {
-    @if($space != zero) {
-      .inset-#{$space} {
-        @include inset($space);
-      }
+  @each $size, $_ in map-remove($_spacings, zero) {
+    .inset-#{$size} {
+      @include inset($size);
+    }
 
-      .squish-h-#{$space} {
-        @include _spacing($space, "padding-left");
-        @include _spacing($space, "padding-right");
-      }
+    .squish-h-#{$size} {
+      @include _spacing($size, "padding-left");
+      @include _spacing($size, "padding-right");
+    }
 
-      .squish-v-#{$space} {
-        @include _spacing($space, "padding-bottom");
-        @include _spacing($space, "padding-top");
-      }
+    .squish-v-#{$size} {
+      @include _spacing($size, "padding-bottom");
+      @include _spacing($size, "padding-top");
+    }
 
-      .stack-#{$space} {
-        @include stack($space);
-      }
+    .stack-#{$size} {
+      @include stack($size);
+    }
 
-      .inline-#{$space} {
-        @include inline($space);
-      }
+    .inline-#{$size} {
+      @include inline($size);
+    }
 
-      .row-gap-#{$space} {
-        @include rowGap($space);
-      }
+    .row-gap-#{$size} {
+      @include rowGap($size);
+    }
 
-      .column-gap-#{$space} {
-        @include columnGap($space);
-      }
+    .column-gap-#{$size} {
+      @include columnGap($size);
     }
   }
-
 }
