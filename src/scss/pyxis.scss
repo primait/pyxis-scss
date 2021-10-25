@@ -7,9 +7,9 @@
 /**
  * Pyxis foundations.
  */
-@use "foundations";
+@use "foundations" as pyxis;
 @use "atoms";
 
 html {
-  @include foundations.typographyGlobalSettings();
+  @include pyxis.typographyGlobalSettings();
 }

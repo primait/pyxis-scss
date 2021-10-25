@@ -3,11 +3,11 @@
 
 /**
  * Responsive spacing map
- * The first key is the name of size (xl, l, m, s)
- * The second key is breakpoint (base, small, medium, large, xlarge)
+ * The first key is the name of size (xxxl, xxl, xl, l, m, s, xs, xxs, xxxs)
+ * The second key is breakpoint (base, medium, large, xlarge)
  *
  * @type Map
- * @access public
+ * @access private
  */
 $_spacings: (
   xxxl: (
@@ -47,23 +47,38 @@ $_spacings: (
   xxxs: (
     base: 5,
   ),
+  zero: (
+    base: 0,
+  )
 );
 
 /**
- * Includes the properties contained in the spacings map in every breakpoints
+ * Includes the size contained in the spacings map on property in every breakpoints
  *
  * @param {String} $size - Name of the size
- * @param {String} $breakpoint - Name of the breakpoint
+ * @param {String} $property - Name of the property
+ * @param {Boolean} $lastChildReset - Remove spacing in last child
  * @throws {Error}
  *
  * @access private
  */
-@function _spacing($size, $breakpoint) {
-  @return lib.getOrDie($_spacings, $size, $breakpoint);
+@mixin _spacing($size, $property, $lastChildReset: false) {
+  @each $breakpoint, $space in lib.getOrDie($_spacings, $size) {
+    @include breakpoints.mq($breakpoint) {
+      #{$property}: if($space == 0, $space, lib.rem($space));
+    }
+  }
+
+  @if $lastChildReset {
+    &:last-child {
+      #{$property}: 0;
+    }
+  }
 }
 
 /**
- * Includes the padding by name contained in the spacings map in every breakpoints
+ * Includes equal padding by size contained in the spacings map in every breakpoints.
+ * An inset offers indents content on all four sides.
  *
  * @param {String} $size - Name of the size
  * @throws {Error}
@@ -71,34 +86,117 @@ $_spacings: (
  * @access public
  */
 @mixin inset($size) {
-  @each $breakpoint, $space in lib.getOrDie($_spacings, $size) {
-    @include breakpoints.mq($breakpoint) {
-      padding: lib.rem($space);
-    }
-  }
+  @include _spacing($size, "padding");
 }
 
 /**
- * Includes the padding by name contained in the spacings map in every breakpoints
+ * Includes unequal padding for vertical and horizontal edge
+ * by size contained in the spacings map in every breakpoints.
+ * Unlike the inset the squish is used to have different indentations
+ + between horizontal and vertical sides.
  *
  * @param {String} $size - Name of the size
  * @throws {Error}
  *
  * @access public
  */
-@mixin squish($horizontalSize, $verticalSize) {
-  @each $breakpoint, $space in lib.getOrDie($_spacings, $horizontalSize) {
-    @include breakpoints.mq($breakpoint) {
-      padding-left: lib.rem($space);
-      padding-right: lib.rem($space);
-    }
-  }
-
-  @each $breakpoint, $space in lib.getOrDie($_spacings, $verticalSize) {
-    @include breakpoints.mq($breakpoint) {
-      padding-bottom: lib.rem($space);
-      padding-top: lib.rem($space);
-    }
-  }
+@mixin squish($verticalSize, $horizontalSize) {
+  @include _spacing($horizontalSize, "padding-left");
+  @include _spacing($horizontalSize, "padding-right");
+  @include _spacing($verticalSize, "padding-bottom");
+  @include _spacing($verticalSize, "padding-top");
 }
 
+/**
+ * Includes margin-bottom by size contained in the spacings map in every breakpoints.
+ * It is used to stack the elements one under the other.
+ *
+ * @param {String} $size - Name of the size
+ * @throws {Error}
+ *
+ * @access public
+ */
+@mixin stack($size) {
+  @include _spacing($size, "margin-bottom", true);
+}
+
+/**
+ * Includes margin-right by size contained in the spacings map in every breakpoints.
+ * Same as stack, but serves to space out horizontally elements (inline).
+ *
+ * @param {String} $size - Name of the size
+ * @throws {Error}
+ *
+ * @access public
+ */
+@mixin inline($size) {
+  @include _spacing($size, "margin-right", true);
+}
+
+/**
+ * Includes grid-row-gap by size contained in the spacings map in every breakpoints
+ * Same as stack, but used to space out vertical elements in case a grid is used (display: grid).
+ *
+ * @param {String} $size - Name of the size
+ * @throws {Error}
+ *
+ * @access public
+ */
+@mixin rowGap($size) {
+  @include _spacing($size, "grid-row-gap");
+}
+
+/**
+ * Includes grid-column-gap by size contained in the spacings map in every breakpoints
+ * Like inline, but used to space out horizontal elements in case a grid is used (display: grid).
+ *
+ * @param {String} $size - Name of the size
+ * @throws {Error}
+ *
+ * @access public
+ */
+@mixin columnGap($size) {
+  @include _spacing($size, "grid-column-gap");
+}
+
+/**
+ * Create atom classes for all spacing in $_spacings map
+ *
+ * @access public
+ */
+@mixin createAtoms() {
+  @each $space, $_ in $_spacings {
+    @if($space != zero) {
+      .inset-#{$space} {
+        @include inset($space);
+      }
+
+      .squish-h-#{$space} {
+        @include _spacing($space, "padding-left");
+        @include _spacing($space, "padding-right");
+      }
+
+      .squish-v-#{$space} {
+        @include _spacing($space, "padding-bottom");
+        @include _spacing($space, "padding-top");
+      }
+
+      .stack-#{$space} {
+        @include stack($space);
+      }
+
+      .inline-#{$space} {
+        @include inline($space);
+      }
+
+      .row-gap-#{$space} {
+        @include rowGap($space);
+      }
+
+      .column-gap-#{$space} {
+        @include columnGap($space);
+      }
+    }
+  }
+
+}
