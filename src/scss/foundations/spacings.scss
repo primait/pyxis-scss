@@ -47,95 +47,104 @@ $_spacings: (
   xxxs: (
     base: 5,
   ),
-  zero: (
-    base: 0,
-  )
 );
 
 /**
  * Includes the size contained in the spacings map on property in every breakpoints
  *
- * @param {String} $size - Name of the size
+ * @param {String | Number} $size - Name of the size or 0 value
  * @param {String} $property - Name of the property
- * @param {Boolean} $lastChildReset - Remove spacing in last child
  * @throws {Error}
  *
  * @access private
  */
-@mixin _spacing($size, $property, $lastChildReset: false) {
-  @each $breakpoint, $space in lib.getOrDie($_spacings, $size) {
-    @include breakpoints.mq($breakpoint) {
-      #{$property}: lib.rem($space);
-    }
-  }
-
-  @if $lastChildReset {
-    &:last-child {
-      #{$property}: 0;
+@mixin _spacing($size, $property) {
+  @if $size == 0 {
+    #{$property}: 0;
+  } @else {
+    @each $breakpoint, $space in lib.getOrDie($_spacings, $size) {
+      @include breakpoints.mq($breakpoint) {
+        #{$property}: lib.rem($space);
+      }
     }
   }
 }
 
 /**
  * Includes equal padding by size contained in the spacings map in every breakpoints.
- * An inset offers indents content on all four sides.
  *
  * @param {String} $size - Name of the size
  * @throws {Error}
  *
  * @access public
  */
-@mixin inset($size) {
+@mixin padding($size) {
   @include _spacing($size, "padding");
 }
 
 /**
- * Includes unequal padding for vertical and horizontal edge
+ * Includes unequal padding for vertical edge
  * by size contained in the spacings map in every breakpoints.
- * Unlike the inset the squish is used to have different indentations
- + between horizontal and vertical sides.
  *
  * @param {String} $size - Name of the size
  * @throws {Error}
  *
  * @access public
  */
-@mixin squish($verticalSize, $horizontalSize) {
-  @include _spacing($horizontalSize, "padding-left");
-  @include _spacing($horizontalSize, "padding-right");
-  @include _spacing($verticalSize, "padding-bottom");
-  @include _spacing($verticalSize, "padding-top");
+@mixin verticalPadding($size) {
+  @include _spacing($size, "padding-bottom");
+  @include _spacing($size, "padding-top");
+}
+
+/**
+ * Includes unequal padding for horizontal edge
+ * by size contained in the spacings map in every breakpoints.
+ *
+ * @param {String} $size - Name of the size
+ * @throws {Error}
+ *
+ * @access public
+ */
+@mixin horizontalPadding($size) {
+  @include _spacing($size, "padding-left");
+  @include _spacing($size, "padding-right");
 }
 
 /**
  * Includes margin-bottom by size contained in the spacings map in every breakpoints.
- * It is used to stack the elements one under the other.
  *
  * @param {String} $size - Name of the size
  * @throws {Error}
  *
  * @access public
  */
-@mixin stack($size) {
-  @include _spacing($size, "margin-bottom", true);
+@mixin verticalSpacing($size) {
+  @include _spacing($size, "margin-bottom");
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 /**
  * Includes margin-right by size contained in the spacings map in every breakpoints.
- * Same as stack, but serves to space out horizontally elements (inline).
  *
  * @param {String} $size - Name of the size
  * @throws {Error}
  *
  * @access public
  */
-@mixin inline($size) {
-  @include _spacing($size, "margin-right", true);
+@mixin horizontalSpacing($size) {
+  @include _spacing($size, "margin-right");
+
+  &:last-child {
+    margin-right: 0;
+  }
 }
 
 /**
  * Includes grid-row-gap by size contained in the spacings map in every breakpoints
- * Same as stack, but used to space out vertical elements in case a grid is used (display: grid).
+ * Same as verticalSpacing(), but used to space out vertical elements in case a grid is used (display: grid).
  *
  * @param {String} $size - Name of the size
  * @throws {Error}
@@ -148,7 +157,7 @@ $_spacings: (
 
 /**
  * Includes grid-column-gap by size contained in the spacings map in every breakpoints
- * Like inline, but used to space out horizontal elements in case a grid is used (display: grid).
+ * Like horizontalSpacing(), but used to space out horizontal elements in case a grid is used (display: grid).
  *
  * @param {String} $size - Name of the size
  * @throws {Error}
@@ -165,27 +174,25 @@ $_spacings: (
  * @access public
  */
 @mixin createAtoms() {
-  @each $size, $_ in map-remove($_spacings, zero) {
-    .inset-#{$size} {
-      @include inset($size);
+  @each $size, $_ in $_spacings {
+    .padding-#{$size} {
+      @include padding($size);
     }
 
-    .squish-h-#{$size} {
-      @include _spacing($size, "padding-left");
-      @include _spacing($size, "padding-right");
+    .padding-h-#{$size} {
+      @include horizontalPadding($size);
     }
 
-    .squish-v-#{$size} {
-      @include _spacing($size, "padding-bottom");
-      @include _spacing($size, "padding-top");
+    .padding-v-#{$size} {
+      @include verticalPadding($size);
     }
 
-    .stack-#{$size} {
-      @include stack($size);
+    .spacing-v-#{$size} {
+      @include verticalSpacing($size);
     }
 
-    .inline-#{$size} {
-      @include inline($size);
+    .spacing-h-#{$size} {
+      @include horizontalSpacing($size);
     }
 
     .row-gap-#{$size} {
