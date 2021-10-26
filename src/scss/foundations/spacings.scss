@@ -52,13 +52,13 @@ $_spacings: (
 /**
  * Includes the size contained in the spacings map on property in every breakpoints
  *
- * @param {String | Number} $size - Name of the size or 0 value
  * @param {String} $property - Name of the property
+ * @param {String | Number} $size - Name of the size or 0 value
  * @throws {Error}
  *
  * @access private
  */
-@mixin _spacing($size, $property) {
+@mixin _spacing($property, $size) {
   @if $size == 0 {
     #{$property}: 0;
   } @else {
@@ -79,7 +79,7 @@ $_spacings: (
  * @access public
  */
 @mixin padding($size) {
-  @include _spacing($size, "padding");
+  @include _spacing("padding", $size);
 }
 
 /**
@@ -92,8 +92,8 @@ $_spacings: (
  * @access public
  */
 @mixin verticalPadding($size) {
-  @include _spacing($size, "padding-bottom");
-  @include _spacing($size, "padding-top");
+  @include _spacing("padding-bottom", $size);
+  @include _spacing("padding-top", $size);
 }
 
 /**
@@ -106,8 +106,8 @@ $_spacings: (
  * @access public
  */
 @mixin horizontalPadding($size) {
-  @include _spacing($size, "padding-left");
-  @include _spacing($size, "padding-right");
+  @include _spacing("padding-left", $size);
+  @include _spacing("padding-right", $size);
 }
 
 /**
@@ -119,7 +119,7 @@ $_spacings: (
  * @access public
  */
 @mixin verticalSpacing($size) {
-  @include _spacing($size, "margin-bottom");
+  @include _spacing("margin-bottom", $size);
 
   &:last-child {
     margin-bottom: 0;
@@ -135,7 +135,7 @@ $_spacings: (
  * @access public
  */
 @mixin horizontalSpacing($size) {
-  @include _spacing($size, "margin-right");
+  @include _spacing("margin-right", $size);
 
   &:last-child {
     margin-right: 0;
@@ -152,7 +152,7 @@ $_spacings: (
  * @access public
  */
 @mixin rowGap($size) {
-  @include _spacing($size, "grid-row-gap");
+  @include _spacing("grid-row-gap", $size);
 }
 
 /**
@@ -165,7 +165,7 @@ $_spacings: (
  * @access public
  */
 @mixin columnGap($size) {
-  @include _spacing($size, "grid-column-gap");
+  @include _spacing("grid-column-gap", $size);
 }
 
 /**
