@@ -69,13 +69,9 @@ $_edges: (all, top, right, bottom, left);
  * @access public
  */
 @mixin createAtoms() {
-  @each $edge in $_edges {
-    @each $size, $_ in $_radius {
-      $append: if($edge == all, radius, radius-#{$edge});
-
-      .#{$append}-#{$size} {
-        @include radius($size, $edge);
-      }
+  @each $size, $_ in $_radius {
+    .radius-#{$size} {
+      @include radius($size, all);
     }
   }
 }
