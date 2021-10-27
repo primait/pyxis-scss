@@ -1,7 +1,9 @@
 @use "../foundations/colors";
+@use "../foundations/radius";
 @use "../foundations/spacings";
 @use "../foundations/typography";
 
 @include colors.createAtoms();
+@include radius.createAtoms();
 @include spacings.createAtoms();
 @include typography.createAtoms();
