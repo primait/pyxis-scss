@@ -1,0 +1,18 @@
+@use "../lib";
+@use "breakpoints";
+
+/**
+ * Elevations sizing map
+ *
+ * @type Map
+ * @access private
+ */
+$_elevationSize: (
+  s: 0 lib.rem(5px) lib.rem(10px) lib.rem(-2px),
+  m: 0 lib.rem(15px) lib.rem(30px) lib.rem(-5px),
+  l: 0 lib.rem(30px) lib.rem(60px) lib.rem(-10px),
+);
+
+@function _elevationSize($size) {
+  @return lib.getOrDie($_elevationSize, $size);
+}
