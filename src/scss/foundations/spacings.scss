@@ -1,0 +1,206 @@
+@use "../lib";
+@use "breakpoints";
+
+/**
+ * Responsive spacing map
+ * The first key is the name of size (xxxl, xxl, xl, l, m, s, xs, xxs, xxxs)
+ * The second key is breakpoint (base, medium, large, xlarge)
+ *
+ * @type Map
+ * @access private
+ */
+$_spacings: (
+  xxxl: (
+    base: 50px,
+    medium: 60px,
+    large: 100px,
+    xlarge: 120px,
+  ),
+  xxl: (
+    base: 40px,
+    medium: 50px,
+    large: 80px,
+  ),
+  xl: (
+    base: 35px,
+    medium: 40px,
+    large: 60px,
+  ),
+  l: (
+    base: 30px,
+    medium: 35px,
+    large: 40px,
+  ),
+  m: (
+    base: 25px,
+    medium: 30px,
+  ),
+  s: (
+    base: 20px,
+  ),
+  xs: (
+    base: 15px,
+  ),
+  xxs: (
+    base: 10px,
+  ),
+  xxxs: (
+    base: 5,
+  ),
+);
+
+/**
+ * Includes the size contained in the spacings map on property in every breakpoints
+ *
+ * @param {String} $property - Name of the property
+ * @param {String | Number} $size - Name of the size or 0 value
+ * @throws {Error}
+ *
+ * @access private
+ */
+@mixin _spacing($property, $size) {
+  @if $size == 0 {
+    #{$property}: 0;
+  } @else {
+    @each $breakpoint, $space in lib.getOrDie($_spacings, $size) {
+      @include breakpoints.mq($breakpoint) {
+        #{$property}: lib.rem($space);
+      }
+    }
+  }
+}
+
+/**
+ * Includes equal padding by size contained in the spacings map in every breakpoints.
+ *
+ * @param {String} $size - Name of the size
+ * @throws {Error}
+ *
+ * @access public
+ */
+@mixin padding($size) {
+  @include _spacing("padding", $size);
+}
+
+/**
+ * Includes unequal padding for vertical edge
+ * by size contained in the spacings map in every breakpoints.
+ *
+ * @param {String} $size - Name of the size
+ * @throws {Error}
+ *
+ * @access public
+ */
+@mixin verticalPadding($size) {
+  @include _spacing("padding-bottom", $size);
+  @include _spacing("padding-top", $size);
+}
+
+/**
+ * Includes unequal padding for horizontal edge
+ * by size contained in the spacings map in every breakpoints.
+ *
+ * @param {String} $size - Name of the size
+ * @throws {Error}
+ *
+ * @access public
+ */
+@mixin horizontalPadding($size) {
+  @include _spacing("padding-left", $size);
+  @include _spacing("padding-right", $size);
+}
+
+/**
+ * Includes margin-bottom by size contained in the spacings map in every breakpoints.
+ *
+ * @param {String} $size - Name of the size
+ * @throws {Error}
+ *
+ * @access public
+ */
+@mixin verticalSpacing($size) {
+  @include _spacing("margin-bottom", $size);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/**
+ * Includes margin-right by size contained in the spacings map in every breakpoints.
+ *
+ * @param {String} $size - Name of the size
+ * @throws {Error}
+ *
+ * @access public
+ */
+@mixin horizontalSpacing($size) {
+  @include _spacing("margin-right", $size);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+/**
+ * Includes grid-row-gap by size contained in the spacings map in every breakpoints
+ * Same as verticalSpacing(), but used to space out vertical elements in case a grid is used (display: grid).
+ *
+ * @param {String} $size - Name of the size
+ * @throws {Error}
+ *
+ * @access public
+ */
+@mixin rowGap($size) {
+  @include _spacing("grid-row-gap", $size);
+}
+
+/**
+ * Includes grid-column-gap by size contained in the spacings map in every breakpoints
+ * Like horizontalSpacing(), but used to space out horizontal elements in case a grid is used (display: grid).
+ *
+ * @param {String} $size - Name of the size
+ * @throws {Error}
+ *
+ * @access public
+ */
+@mixin columnGap($size) {
+  @include _spacing("grid-column-gap", $size);
+}
+
+/**
+ * Create atom classes for all spacing in $_spacings map
+ *
+ * @access public
+ */
+@mixin createAtoms() {
+  @each $size, $_ in $_spacings {
+    .padding-#{$size} {
+      @include padding($size);
+    }
+
+    .padding-h-#{$size} {
+      @include horizontalPadding($size);
+    }
+
+    .padding-v-#{$size} {
+      @include verticalPadding($size);
+    }
+
+    .spacing-v-#{$size} {
+      @include verticalSpacing($size);
+    }
+
+    .spacing-h-#{$size} {
+      @include horizontalSpacing($size);
+    }
+
+    .row-gap-#{$size} {
+      @include rowGap($size);
+    }
+
+    .column-gap-#{$size} {
+      @include columnGap($size);
+    }
+  }
+}
