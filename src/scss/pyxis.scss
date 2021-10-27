@@ -13,7 +13,3 @@
 html {
   @include pyxis.typographyGlobalSettings();
 }
-
-.cose {
-  border-radius: pyxis.radius(xl);
-}
