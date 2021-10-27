@@ -1,0 +1,42 @@
+@use "../lib";
+@use "breakpoints";
+
+/**
+ * Border radius map
+ *
+ * @type Map
+ * @access private
+ */
+$_radius: (
+  xl: 25px,
+  l: 20px,
+  m: 15px,
+  s: 10px,
+  xs: 5px,
+);
+
+/**
+ * Returns the radius value from map $_radius
+ *
+ * @param {String} $size - Size of radius
+ * @return {Color} Representation of radius size
+ * @throws {Error}
+ *
+ * @access public
+ */
+@function radius($size) {
+  @return lib.rem(lib.getOrDie($_radius, $size));
+}
+
+/**
+ * Create atom classes for all radius in $_radius map
+ *
+ * @access public
+ */
+@mixin createAtoms() {
+  @each $sizeName, $sizeValue in $_radius {
+    .radius-#{$sizeName} {
+      border-radius: lib.rem($sizeValue);
+    }
+  }
+}
