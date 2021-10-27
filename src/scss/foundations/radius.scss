@@ -45,7 +45,7 @@ $_edges: (all, top, right, bottom, left);
  *
  * @access public
  */
-@mixin radius($size, $edge) {
+@mixin radius($size, $edge: all) {
   @if index($_edges, $edge) {
     @if $edge == top {
       border-radius: _radius($size) _radius($size) 0 0;
@@ -71,7 +71,7 @@ $_edges: (all, top, right, bottom, left);
 @mixin createAtoms() {
   @each $size, $_ in $_radius {
     .radius-#{$size} {
-      @include radius($size, all);
+      @include radius($size);
     }
   }
 }
