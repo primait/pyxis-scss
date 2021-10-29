@@ -85,7 +85,8 @@ $_gradients: (
 /// Returns the $color hex from map $_colors
 ///
 /// @param {String} $color - Name of color
-/// @return {Color} Representation of named colorthrows {Error}
+/// @return {Color} Representation of named color
+/// @throw {Error}
 ///
 /// @access public
 @function color($color) {
@@ -95,7 +96,8 @@ $_gradients: (
 /// Returns the $gradient from map $_gradients
 ///
 /// @param {String} $gradient - Name of gradient
-/// @return {Color} Representation of named colorthrows {Error}
+/// @return {Color} Representation of named color
+/// @throw {Error}
 ///
 /// @access public
 @function gradient($gradient) {
@@ -104,7 +106,7 @@ $_gradients: (
 
 /// Create atom classes for all colors and gradient in $_colors map and $_gradients map
 ///
-///  @access public
+/// @access public
 @mixin createAtoms() {
   @each $colorName, $colorValue in $_colors {
     .bg-#{lib.camelToKebabCase($colorName)} {

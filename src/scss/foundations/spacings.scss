@@ -56,7 +56,7 @@ $_spacings: (
 ///
 /// @param {String} $property - Name of the property
 /// @param {String | Number} $size - Name of the size or 0 value
-/// @throws {Error}
+/// @throw {Error}
 ///
 /// @access private
 ////
@@ -75,7 +75,7 @@ $_spacings: (
 /// Includes equal padding by size contained in the spacings map in every breakpoints.
 ///
 /// @param {String} $size - Name of the size
-/// @throws {Error}
+/// @throw {Error}
 ///
 /// @access public
 ////
@@ -87,7 +87,7 @@ $_spacings: (
 /// by size contained in the spacings map in every breakpoints.
 ///
 /// @param {String} $size - Name of the size
-/// @throws {Error}
+/// @throw {Error}
 ///
 /// @access public
 ////
@@ -100,7 +100,7 @@ $_spacings: (
 /// by size contained in the spacings map in every breakpoints.
 ///
 /// @param {String} $size - Name of the size
-/// @throws {Error}
+/// @throw {Error}
 ///
 /// @access public
 ////
@@ -112,7 +112,7 @@ $_spacings: (
 /// Includes margin-bottom by size contained in the spacings map in every breakpoints.
 ///
 /// @param {String} $size - Name of the size
-/// @throws {Error}
+/// @throw {Error}
 ///
 /// @access public
 ////
@@ -127,7 +127,7 @@ $_spacings: (
 /// Includes margin-right by size contained in the spacings map in every breakpoints.
 ///
 /// @param {String} $size - Name of the size
-/// @throws {Error}
+/// @throw {Error}
 ///
 /// @access public
 ////
@@ -143,7 +143,7 @@ $_spacings: (
 /// Same as verticalSpacing(), but used to space out vertical elements in case a grid is used (display: grid).
 ///
 /// @param {String} $size - Name of the size
-/// @throws {Error}
+/// @throw {Error}
 ///
 /// @access public
 ////
@@ -155,7 +155,7 @@ $_spacings: (
 /// Like horizontalSpacing(), but used to space out horizontal elements in case a grid is used (display: grid).
 ///
 /// @param {String} $size - Name of the size
-/// @throws {Error}
+/// @throw {Error}
 ///
 /// @access public
 ////

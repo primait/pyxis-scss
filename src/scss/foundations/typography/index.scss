@@ -51,7 +51,7 @@ $_letterSpacing: (
 ///
 /// @param {Map} $font - The font settings
 /// @return {String} - A font-family value
-/// @throws {Error}
+/// @throw {Error}
 /// @access private
 @function _fontFamily($font) {
   @return #{lib.getOrDie($font, name), lib.getOrDie($font, fallback)};
@@ -61,7 +61,7 @@ $_letterSpacing: (
 ///
 /// @param {Number} $fontSize - The font-size to apply the line-height to
 /// @return {Number} - A line-height represented in percentage
-/// @throws {Error}
+/// @throw {Error}
 /// @access private
 @function _lineHeight($fontSize) {
   $shouldUseBaseLineHeight: lib.stripUnit($fontSize) >= 32;
@@ -73,7 +73,7 @@ $_letterSpacing: (
 ///
 /// @param {Number} $fontSize - The font-size to apply the letter-spacing to
 /// @return {Number} - A letter-spacing represented in rem
-/// @throws {Error}
+/// @throw {Error}
 /// @access private
 @function _letterSpacing($fontSize) {
   $shouldUseBaseLetterSpacing: lib.stripUnit($fontSize) >= 16;
@@ -108,7 +108,7 @@ $_letterSpacing: (
 /// Include the font-weight value by name
 ///
 /// @param {String} $weight - The name of the weight
-/// @throws {Error}
+/// @throw {Error}
 /// @access private
 @mixin _fontWeight($weight) {
   font-weight: #{lib.getOrDie($_font, weights, $weight)};
@@ -118,7 +118,7 @@ $_letterSpacing: (
 ///
 /// @param {Map} $fontSizes - The map of fontSize
 /// @param {String} $size - Name of the $size
-/// @throws {Error}
+/// @throw {Error}
 /// @access private
 @mixin _size($fontSizes, $size) {
   @each $breakpoint, $value in lib.getOrDie($fontSizes, $size) {
@@ -136,7 +136,7 @@ $_letterSpacing: (
 ///
 /// @param {String} $size - The name of the size
 /// @param {String} $weight - The name of the weight
-/// @throws {Error}
+/// @throw {Error}
 /// @access public
 @mixin title($size, $weight) {
   @include _size(title.$fontSizes, $size);
@@ -152,7 +152,7 @@ $_letterSpacing: (
 ///
 /// @param {String} $size - The name of the size
 /// @param {String} $weight - The name of the weight
-/// @throws {Error}
+/// @throw {Error}
 /// @access public
 @mixin text($size, $weight) {
   @include _fontWeight($weight);

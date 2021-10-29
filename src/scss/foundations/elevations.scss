@@ -33,7 +33,7 @@ $_elevationColor: (
 /// Returns the elevation size from map $_elevationSize
 ///
 /// @param {String} $size - Name of size
-/// @throws {Error}
+/// @throw {Error}
 /// @access private
 @function _elevationSize($size) {
   @return lib.getOrDie($_elevationSize, $size);
@@ -42,7 +42,7 @@ $_elevationColor: (
 /// Returns the elevation color from map $_elevationColor
 ///
 /// @param {String} $color - Name of size
-/// @throws {Error}
+/// @throw {Error}
 /// @access private
 @function _elevationColor($color) {
   @return lib.getOrDie($_elevationColor, $color);
@@ -52,7 +52,7 @@ $_elevationColor: (
 ///
 /// @param {String} $size - Name of the size
 /// @param {String} $color - Name of the color
-/// @throws {Error}
+/// @throw {Error}
 /// @access public
 @mixin elevation($size, $color) {
   box-shadow: _elevationSize($size) _elevationColor($color);
