@@ -8,12 +8,14 @@
   "license": "ISC",
   "private": false,
   "scripts": {
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack build --config webpack.prod.js",
     "lint": "stylelint \"src/scss/**/*.scss\"",
     "lint:fix": "stylelint \"src/scss/**/*.scss\" --fix",
-    "serve": "webpack serve"
+    "serve": "webpack serve --config webpack.common.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "webpack-merge": "^5.8.0"
+  },
   "devDependencies": {
     "autoprefixer": "^10.3.7",
     "clean-webpack-plugin": "^4.0.0",

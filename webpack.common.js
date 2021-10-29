@@ -31,7 +31,7 @@ module.exports = {
     publicPath: "/",
     filename: "[name].js",
   },
-  mode: "development",
+  mode: 'development',
   module: {
     rules: [
       {
@@ -50,13 +50,16 @@ module.exports = {
       },
     ],
   },
-  plugins: [new CleanWebpackPlugin(), new MiniCssExtractPlugin(), new StylelintPlugin(stylelintOptions)],
+  plugins: [
+      new CleanWebpackPlugin(), 
+      new MiniCssExtractPlugin(), 
+      new StylelintPlugin(stylelintOptions)
+  ],
   devServer: {
     static: {
       directory: path.join(__dirname, "./"),
     },
     compress: true,
     port: 8080,
-    
   }
 };
