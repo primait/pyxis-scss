@@ -1,3 +1,10 @@
+////
+/// Atoms are CSS classes meant to be used directly on your HTML tag
+/// They follow single responsibility principle.
+///
+/// @group  ATOMS
+////
+
 @use "../foundations/colors";
 @use "../foundations/elevations";
 @use "../foundations/radius";

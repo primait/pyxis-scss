@@ -1,0 +1,19 @@
+{
+    "display": {
+        "access": ["public"],
+        "alias": true,
+        "watermark": false
+    }, 
+    "groups": {
+        "ATOMS": "Atoms",
+        "BREAKPOINTS": "Breakpoints",
+        "COLORS": "Colors",
+        "CONFIGURATION": "Configuration",
+        "ELEVATION": "Elevation",
+        "LIB": "Core functions",
+        "SPACINGS": "Spacings",
+        "RADIUS": "Radius",
+        "TYPOGRAPHY": "Typography",
+        "undefined": "Globals"
+    }
+}

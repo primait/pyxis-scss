@@ -9,7 +9,7 @@
   "private": false,
   "scripts": {
     "build": "webpack build --config webpack.prod.js",
-    "build:docs": "sassdoc src",
+    "build:docs": "sassdoc src --config sassdoc.config.json",
     "lint": "stylelint \"src/scss/**/*.scss\"",
     "lint:fix": "stylelint \"src/scss/**/*.scss\" --fix",
     "serve": "webpack serve --config webpack.common.js"
