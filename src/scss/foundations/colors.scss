@@ -32,12 +32,10 @@ $_gradientAction: linear-gradient(45deg, $_colorActionBase, $_colorActionLight);
 $_gradientBrand: linear-gradient(45deg, $_colorBrandBase, $_colorBrandLight);
 $_gradientNeutral: linear-gradient(45deg, $_colorNeutral25, $_colorNeutralBase);
 
-/**
- * The color palette of Pyxis
- *
- * @type Map
- * @access private
- */
+/// The color palette of Pyxis
+///
+/// @type Map
+/// @access private
 $_colors: (
   actionBase: $_colorActionBase,
   actionDark: $_colorActionDark,
@@ -63,57 +61,45 @@ $_colors: (
   successLight: $_colorSuccessLight,
 );
 
-/**
- * The color palette for text
- *
- * @type List
- * @access private
- */
+/// The color palette for text
+///
+/// @type List
+/// @access private
 $_textColors: (actionBase, alertBase, brandBase, errorBase, neutral25, neutralBase, neutralLight, successBase);
 
-/**
- * The gradient palette of Pyxis
- *
- * @type Map
- * @access private
- */
+/// The gradient palette of Pyxis
+///
+/// @type Map
+/// @access private
 $_gradients: (
   action: $_gradientAction,
   brand: $_gradientBrand,
   neutral: $_gradientNeutral,
 );
 
-/**
- * Returns the $color hex from map $_colors
- *
- * @param {String} $color - Name of color
- * @return {Color} Representation of named color
- * @throws {Error}
- *
- * @access public
- */
+/// Returns the $color hex from map $_colors
+///
+/// @param {String} $color - Name of color
+/// @return {Color} Representation of named colorthrows {Error}
+///
+/// @access public
 @function color($color) {
   @return lib.getOrDie($_colors, $color);
 }
 
-/**
- * Returns the $gradient from map $_gradients
- *
- * @param {String} $gradient - Name of gradient
- * @return {Color} Representation of named color
- * @throws {Error}
- *
- * @access public
- */
+/// Returns the $gradient from map $_gradients
+///
+/// @param {String} $gradient - Name of gradient
+/// @return {Color} Representation of named colorthrows {Error}
+///
+/// @access public
 @function gradient($gradient) {
   @return lib.getOrDie($_gradients, $gradient);
 }
 
-/**
- * Create atom classes for all colors and gradient in $_colors map and $_gradients map
- *
- * @access public
- */
+/// Create atom classes for all colors and gradient in $_colors map and $_gradients map
+///
+///  @access public
 @mixin createAtoms() {
   @each $colorName, $colorValue in $_colors {
     .bg-#{lib.camelToKebabCase($colorName)} {

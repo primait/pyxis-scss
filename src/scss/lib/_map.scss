@@ -1,13 +1,10 @@
-/**
- * Throw Error if $keys is not in map
- *
- * @param {Map} $map - A map
- * @param {Args} $keys - Keys in map
- * @return {Sass::Script::Value::Base}
- * @throws {Error}
- *
- * @access public
- */
+/// Throw Error if $keys is not in map
+///
+/// @param {Map} $map - A map
+/// @param {Args} $keys - Keys in map
+/// @return {Sass::Script::Value::Base}
+/// @throws {Error}
+/// @access public
 @function getOrDie($map, $keys...) {
   @each $key in $keys {
     @if not map-has-key($map, $key) {
@@ -18,5 +15,3 @@
 
   @return $map;
 }
-
-

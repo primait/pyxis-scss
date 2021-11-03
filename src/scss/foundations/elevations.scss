@@ -2,24 +2,20 @@
 @use "breakpoints";
 @use "colors";
 
-/**
- * Elevations sizing map
- *
- * @type Map
- * @access private
- */
+/// Elevations sizing map
+///
+/// @type Map
+/// @access private
 $_elevationSize: (
   s: 0 lib.rem(5px) lib.rem(10px) lib.rem(-2px),
   m: 0 lib.rem(15px) lib.rem(30px) lib.rem(-5px),
   l: 0 lib.rem(30px) lib.rem(60px) lib.rem(-10px),
 );
 
-/**
- * Elevations color map
- *
- * @type Map
- * @access private
- */
+/// Elevations color map
+///
+/// @type Map
+/// @access private
 $_elevationColor: (
   action15: rgba(colors.color(actionBase), 0.15),
   action40: rgba(colors.color(actionBase), 0.4),
@@ -29,48 +25,37 @@ $_elevationColor: (
   neutral40: rgba(colors.color(neutral25), 0.4),
 );
 
-/**
- * Returns the elevation size from map $_elevationSize
- *
- * @param {String} $size - Name of size
- * @throws {Error}
- *
- * @access private
- */
+/// Returns the elevation size from map $_elevationSize
+///
+/// @param {String} $size - Name of size
+/// @throws {Error}
+/// @access private
 @function _elevationSize($size) {
   @return lib.getOrDie($_elevationSize, $size);
 }
 
-/**
- * Returns the elevation color from map $_elevationColor
- *
- * @param {String} $color - Name of size
- * @throws {Error}
- *
- * @access private
- */
+/// Returns the elevation color from map $_elevationColor
+///
+/// @param {String} $color - Name of size
+/// @throws {Error}
+/// @access private
 @function _elevationColor($color) {
   @return lib.getOrDie($_elevationColor, $color);
 }
 
-/**
- * Includes box-shadow by size and color
- *
- * @param {String} $size - Name of the size
- * @param {String} $color - Name of the color
- * @throws {Error}
- *
- * @access public
- */
+/// Includes box-shadow by size and color
+///
+/// @param {String} $size - Name of the size
+/// @param {String} $color - Name of the color
+/// @throws {Error}
+/// @access public
 @mixin elevation($size, $color) {
   box-shadow: _elevationSize($size) _elevationColor($color);
 }
 
-/**
- * Create atom classes for all elevation sizes and colors
- *
- * @access public
- */
+/// Create atom classes for all elevation sizes and colors
+///
+/// @access public
 @mixin createAtoms() {
   @each $size, $_ in $_elevationSize {
     @each $color, $_ in $_elevationColor {

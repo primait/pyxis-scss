@@ -1,11 +1,9 @@
-/**
- * Responsive title map
- * The first key is the name of size (xl, l, m, s)
- * The second key is breakpoint (base, small, large)
- *
- * @type Map
- * @access public
- */
+/// Responsive title map
+/// The first key is the name of size (xl, l, m, s)
+/// The second key is breakpoint (base, small, large)
+///
+/// @type Map
+/// @access public
 $fontSizes: (
   xl: (
     base: 28px,
@@ -26,13 +24,11 @@ $fontSizes: (
     base: 16px,
     small: 18px,
     large: 20px,
-  )
+  ),
 );
 
-/**
- * List of allowed font weights for common titles
- *
- * @type List
- * @access public
- */
+/// List of allowed font weights for common titles
+///
+/// @type List
+/// @access public
 $allowedFontWeights: (book, bold);
