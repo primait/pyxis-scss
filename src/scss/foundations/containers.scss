@@ -9,7 +9,6 @@
 /// The variables of containers
 ///
 /// @type Number
-///
 /// @access private
 $_containerMedium: lib.rem(960px);
 $_containerLarge: lib.rem(1140px);
@@ -18,21 +17,18 @@ $_containerXLarge: lib.rem(1370px);
 /// The gutter of container
 ///
 /// @type Number
-///
 /// @access private
 $_gutter: lib.rem(20px);
 
 /// Fluid dimension for small sizes
 ///
 /// @type Number
-///
 /// @access private
 $_fluidWidth: calc(100vw - (#{$_gutter} * 2));
 
 /// The breakpoints of Pyxis
 ///
 /// @type Map
-///
 /// @access private
 $_containers: (
   base: $_fluidWidth,
@@ -49,7 +45,6 @@ $_containers: (
 /// @param {String} $breakpoint - Name of breakpoint
 /// @return {Number} The max-value of container in breakpoint
 /// @throw {Error}
-///
 /// @access private
 @function _container($breakpoint) {
   @return lib.getOrDie($_containers, $breakpoint);
@@ -60,7 +55,6 @@ $_containers: (
 /// @param {String} $breakpoint - Name of breakpoint
 /// @return {Number} The length of @for cycle
 /// @throw {Error}
-///
 /// @access private
 @function _lengthOfBreakpointCycle($breakpoint) {
   @if lib.isNotNull($breakpoint) {
@@ -75,7 +69,6 @@ $_containers: (
 /// @param {String:Null} $breakpoint - Name of breakpoint
 /// @param {Number} $index - Index of breakpoint in $_containers
 /// @return {String:Null} The name of container or null
-///
 /// @access private
 @function _untilBreakpoint($breakpoint, $index) {
   @if lib.isNotNull($breakpoint) {
@@ -110,7 +103,6 @@ $_containers: (
 ///  .wrapper {
 ///     @include container(small, large);
 ///  }
-///
 /// @access public
 @mixin container($fromBreakpoint: base, $untilBreakpoint: null) {
   display: grid;
@@ -134,7 +126,6 @@ $_containers: (
 }
 
 /// Create atom classes for containers
-///
 /// @access public
 @mixin createAtoms() {
   .container {

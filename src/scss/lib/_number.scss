@@ -13,7 +13,6 @@
 ///
 /// @param {Number} $value - Length in pixels
 /// @return {Number} - Length in rems
-///
 /// @access public
 @function rem($value) {
   @if (unitless($value)) {
@@ -28,7 +27,6 @@
 /// @param {Number} $number - Number to remove unit from
 /// @return {Number} - Unitless number
 /// @throw {Warn}
-///
 /// @access public
 @function stripUnit($number) {
   @if type-of($number) == "number" and not unitless($number) {

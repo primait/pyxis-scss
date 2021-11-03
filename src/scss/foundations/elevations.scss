@@ -59,7 +59,6 @@ $_elevationColor: (
 }
 
 /// Create atom classes for all elevation sizes and colors
-///
 /// @access public
 @mixin createAtoms() {
   @each $size, $_ in $_elevationSize {

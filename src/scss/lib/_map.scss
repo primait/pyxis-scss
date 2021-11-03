@@ -9,7 +9,6 @@
 /// @param {Args} $keys - Keys in map
 /// @return {Sass::Script::Value::Base}
 /// @throw {Error}
-///
 /// @access public
 @function getOrDie($map, $keys...) {
   @each $key in $keys {

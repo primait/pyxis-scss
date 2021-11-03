@@ -11,7 +11,6 @@
 /// The second key is breakpoint (base, medium, large, xlarge)
 ///
 /// @type Map
-///
 /// @access private
 $_spacings: (
   xxxl: (
@@ -58,7 +57,6 @@ $_spacings: (
 /// @param {String} $property - Name of the property
 /// @param {String | Number} $size - Name of the size or 0 value
 /// @throw {Error}
-///
 /// @access private
 @mixin _spacing($property, $size) {
   @if $size == 0 {
@@ -76,7 +74,6 @@ $_spacings: (
 ///
 /// @param {String} $size - Name of the size
 /// @throw {Error}
-///
 /// @access public
 @mixin padding($size) {
   @include _spacing("padding", $size);
@@ -87,7 +84,6 @@ $_spacings: (
 ///
 /// @param {String} $size - Name of the size
 /// @throw {Error}
-///
 /// @access public
 @mixin verticalPadding($size) {
   @include _spacing("padding-bottom", $size);
@@ -99,7 +95,6 @@ $_spacings: (
 ///
 /// @param {String} $size - Name of the size
 /// @throw {Error}
-///
 /// @access public
 @mixin horizontalPadding($size) {
   @include _spacing("padding-left", $size);
@@ -110,7 +105,6 @@ $_spacings: (
 ///
 /// @param {String} $size - Name of the size
 /// @throw {Error}
-///
 /// @access public
 @mixin verticalSpacing($size) {
   @include _spacing("margin-bottom", $size);
@@ -124,7 +118,6 @@ $_spacings: (
 ///
 /// @param {String} $size - Name of the size
 /// @throw {Error}
-///
 /// @access public
 @mixin horizontalSpacing($size) {
   @include _spacing("margin-right", $size);
@@ -139,7 +132,6 @@ $_spacings: (
 ///
 /// @param {String} $size - Name of the size
 /// @throw {Error}
-///
 /// @access public
 ////
 @mixin rowGap($size) {
@@ -151,14 +143,12 @@ $_spacings: (
 ///
 /// @param {String} $size - Name of the size
 /// @throw {Error}
-///
 /// @access public
 @mixin columnGap($size) {
   @include _spacing("grid-column-gap", $size);
 }
 
 /// Create atom classes for all spacing in $_spacings map
-///
 /// @access public
 @mixin createAtoms() {
   @each $size, $_ in $_spacings {

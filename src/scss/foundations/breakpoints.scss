@@ -17,7 +17,6 @@ $_breakpointXlarge: 1680px;
 /// The breakpoints of Pyxis
 ///
 /// @type Map
-///
 /// @access private
 $_breakpoints: (
   base: $_breakpointBase,
@@ -32,7 +31,6 @@ $_breakpoints: (
 /// Breakpoint bounding difference
 ///
 /// @type Value
-///
 /// @access private
 $_boundDiff: 1px;
 
@@ -41,7 +39,6 @@ $_boundDiff: 1px;
 /// @param {String} $breakpoint - Name of breakpoint
 /// @return {Number} The min-value in which the breakpoint will be triggered
 /// @throw {Error}
-///
 /// @access public
 @function breakpoint($breakpoint) {
   @return lib.getOrDie($_breakpoints, $breakpoint);
@@ -52,7 +49,6 @@ $_boundDiff: 1px;
 /// @param {String} $breakpoint - Name of breakpoint
 /// @return {Boolean}
 /// @throw {Error}
-///
 /// @access public
 @function isBase($breakpoint) {
   @return $breakpoint == base;
@@ -63,7 +59,6 @@ $_boundDiff: 1px;
 /// @param {String} $from - Name of breakpoint
 /// @param {String | Null} $until - Name of breakpoint
 /// @throw {Error}
-///
 /// @access public
 @mixin mq($from, $until: null) {
   $mediaQuery: "screen and (min-width: #{breakpoint($from)})";
