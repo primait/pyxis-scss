@@ -1,6 +1,6 @@
 {
   "name": "pyxis-scss",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Pyxis is the Prima Assicurazioni's design system.",
   "main": "src/scss/pyxis.scss",
   "repository": "git@github.com:primait/pyxis-scss.git",

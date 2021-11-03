@@ -1,6 +1,7 @@
 ////
 /// Utilities for Math which are not part of sass:math module.
 /// @group  LIB
+////
 
 @use "sass:math";
 @use "../config";
@@ -27,6 +28,7 @@
 /// @param {Number} $number - Number to remove unit from
 /// @return {Number} - Unitless number
 /// @throw {Warn}
+///
 /// @access public
 @function stripUnit($number) {
   @if type-of($number) == "number" and not unitless($number) {

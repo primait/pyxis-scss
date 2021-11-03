@@ -1,6 +1,6 @@
 ////
 /// Spacings are part of a predefined set of negative space used in Pyxis.
-/// @group  SPACINGS
+/// @group SPACINGS
 ////
 
 @use "../lib";
@@ -11,6 +11,7 @@
 /// The second key is breakpoint (base, medium, large, xlarge)
 ///
 /// @type Map
+///
 /// @access private
 $_spacings: (
   xxxl: (
@@ -59,7 +60,6 @@ $_spacings: (
 /// @throw {Error}
 ///
 /// @access private
-////
 @mixin _spacing($property, $size) {
   @if $size == 0 {
     #{$property}: 0;
@@ -78,7 +78,6 @@ $_spacings: (
 /// @throw {Error}
 ///
 /// @access public
-////
 @mixin padding($size) {
   @include _spacing("padding", $size);
 }
@@ -90,7 +89,6 @@ $_spacings: (
 /// @throw {Error}
 ///
 /// @access public
-////
 @mixin verticalPadding($size) {
   @include _spacing("padding-bottom", $size);
   @include _spacing("padding-top", $size);
@@ -103,7 +101,6 @@ $_spacings: (
 /// @throw {Error}
 ///
 /// @access public
-////
 @mixin horizontalPadding($size) {
   @include _spacing("padding-left", $size);
   @include _spacing("padding-right", $size);
@@ -115,7 +112,6 @@ $_spacings: (
 /// @throw {Error}
 ///
 /// @access public
-////
 @mixin verticalSpacing($size) {
   @include _spacing("margin-bottom", $size);
 
@@ -130,7 +126,6 @@ $_spacings: (
 /// @throw {Error}
 ///
 /// @access public
-////
 @mixin horizontalSpacing($size) {
   @include _spacing("margin-right", $size);
 
@@ -158,7 +153,6 @@ $_spacings: (
 /// @throw {Error}
 ///
 /// @access public
-////
 @mixin columnGap($size) {
   @include _spacing("grid-column-gap", $size);
 }
@@ -166,7 +160,6 @@ $_spacings: (
 /// Create atom classes for all spacing in $_spacings map
 ///
 /// @access public
-////
 @mixin createAtoms() {
   @each $size, $_ in $_spacings {
     .padding-#{$size} {

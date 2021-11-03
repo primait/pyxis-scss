@@ -1,6 +1,6 @@
 ////
-/// These are the colours of our design system. Editing them will directly reflect on UI appereance.
-/// @group  COLORS
+/// These are the colours of our design system. Editing them will directly reflect on UI appearance.
+/// @group COLORS
 ////
 
 @use "../lib";
@@ -40,6 +40,7 @@ $_gradientNeutral: linear-gradient(45deg, $_colorNeutral25, $_colorNeutralBase);
 /// The color palette of Pyxis
 ///
 /// @type Map
+///
 /// @access private
 $_colors: (
   actionBase: $_colorActionBase,
@@ -69,12 +70,14 @@ $_colors: (
 /// The color palette for text
 ///
 /// @type List
+///
 /// @access private
 $_textColors: (actionBase, alertBase, brandBase, errorBase, neutral25, neutralBase, neutralLight, successBase);
 
 /// The gradient palette of Pyxis
 ///
 /// @type Map
+///
 /// @access private
 $_gradients: (
   action: $_gradientAction,

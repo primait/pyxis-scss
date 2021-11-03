@@ -1,6 +1,6 @@
 ////
 /// Radius is used to smooth our components borders.
-/// @group  RADIUS
+/// @group RADIUS
 ////
 
 @use "../lib";
@@ -9,6 +9,7 @@
 /// Border radius map
 ///
 /// @type Map
+///
 /// @access private
 $_radius: (
   xl: 25px,
@@ -21,6 +22,7 @@ $_radius: (
 /// List of allowed edges for border-radius
 ///
 /// @type List
+///
 /// @access private
 $_edges: (all, top, right, bottom, left);
 
@@ -40,6 +42,7 @@ $_edges: (all, top, right, bottom, left);
 /// @param {String} $size - Name of the size
 /// @param {String} $edge - Edge to apply the border-radius
 /// @throw {Error}
+///
 /// @access public
 @mixin radius($size, $edge: all) {
   @if index($_edges, $edge) {

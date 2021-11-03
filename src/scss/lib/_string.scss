@@ -1,11 +1,13 @@
 ////
 /// Utilities for working with Strings.
-/// @group  LIB
+/// @group LIB
+////
 
 /// Converts a camelCase $string into a kebab-case one
 ///
 /// @param {String} $string - String in camelCase
 /// @return {String} - String in kebab-case
+///
 /// @access public
 @function camelToKebabCase($string) {
   $alphabet: "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U",
@@ -48,6 +50,7 @@
 /// @param {String} $search - Substring to replace
 /// @param {String} $replace - A new value for `$search` string
 /// @return {String}
+///
 /// @access public
 @function stringReplace($string, $search, $replace: "") {
   $index: str-index($string, $search);
@@ -62,6 +65,7 @@
 ///
 /// @param {String} $string - A string to split into characters.
 /// @return {List} - List of characters of $string
+///
 /// @access public
 @function stringToCharList($string) {
   $chars: ();
