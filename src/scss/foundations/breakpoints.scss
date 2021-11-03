@@ -72,7 +72,11 @@ $_boundDiff: 1px;
     @content;
   } @else {
     @if $until {
-      $mediaQuery: "#{$mediaQuery} and (max-width: #{breakpoint($until) - $_boundDiff})";
+      @if breakpoint($until) > breakpoint($from) {
+        $mediaQuery: "#{$mediaQuery} and (max-width: #{breakpoint($until) - $_boundDiff})";
+      } @else {
+        @error "You cannot use a `$until` value smaller or equal than `$from` value";
+      }
     }
     @media #{$mediaQuery} {
       @content;
