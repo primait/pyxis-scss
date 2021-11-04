@@ -17,7 +17,7 @@ $_breakpointXlarge: 1680px;
 /// The breakpoints of Pyxis
 ///
 /// @type Map
-/// @access private
+/// @access public
 $breakpoints: (
   base: $_breakpointBase,
   xxsmall: $_breakpointXxsmall,

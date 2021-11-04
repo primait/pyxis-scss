@@ -42,15 +42,13 @@
     @include breakpoints.mq($fromBreakpoint, $untilBreakpoint) {
       display: none;
     }
-  }
-
-  @else {
+  } @else {
     @error "You cannot use a `$untilBreakpoint` value smaller or equal than `$fromBreakpoint` value";
   }
 }
 
 /// Create atom classes for hiders
-/// @access publi
+/// @access public
 @mixin createAtoms() {
   @each $fromBreakpointName, $fromBreakpointValue in breakpoints.$breakpoints {
     $append: if(breakpoints.isBase($fromBreakpointName), "", "-from-#{$fromBreakpointName}");
