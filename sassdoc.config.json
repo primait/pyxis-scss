@@ -1,9 +1,11 @@
 {
     "display": {
-        "access": ["public"],
+        "access": [
+            "public"
+        ],
         "alias": true,
         "watermark": false
-    }, 
+    },
     "groups": {
         "ATOMS": "Atoms",
         "BREAKPOINTS": "Breakpoints",
@@ -11,6 +13,7 @@
         "CONFIGURATION": "Configuration",
         "CONTAINERS": "Containers",
         "ELEVATION": "Elevation",
+        "HIDING": "Hiding",
         "LIB": "Core functions",
         "RADIUS": "Radius",
         "SPACINGS": "Spacings",

@@ -18,7 +18,7 @@ $_breakpointXlarge: 1680px;
 ///
 /// @type Map
 /// @access private
-$_breakpoints: (
+$breakpoints: (
   base: $_breakpointBase,
   xxsmall: $_breakpointXxsmall,
   xsmall: $_breakpointXsmall,
@@ -41,7 +41,7 @@ $_boundDiff: 1px;
 /// @throw {Error}
 /// @access public
 @function breakpoint($breakpoint) {
-  @return lib.getOrDie($_breakpoints, $breakpoint);
+  @return lib.getOrDie($breakpoints, $breakpoint);
 }
 
 /// Check if the breakpoint is "base"

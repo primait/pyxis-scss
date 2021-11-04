@@ -1,0 +1,69 @@
+////
+/// Hiding Rules define all rules for hiding content based on device width.
+/// @group HIDING
+////
+
+@use "../lib";
+@use "breakpoints";
+
+/// Hide an element from `$fromBreakpoint` to `$untilBreakpoint` value.
+/// Outside the indicated breakpoints the element will have the assigned display value.
+///
+/// @param {String} $fromBreakpoint - Name of start breakpoint
+/// @param {String} $untilBreakpoint - Name of end breakpoint
+/// @throw {Error}
+///
+/// @example scss - Hide Mixin
+///  // Hide the element for every breakpoints
+///  .element {
+///     @include hide();
+///  }
+///
+///  // Hide element from breakpoint medium
+///  // Until breakpoint medium, the element 
+///  // display property will be `grid`
+///  .element {
+///     display: grid;
+///     @include hide(medium);
+///  }
+///
+///  // Hide element between breakpoint small and large
+///  // Until breakpoint medium, the element 
+///  // display property will be `grid`
+///  .element {
+///     display: grid;
+///     @include hide(small, large);
+///  }
+/// @access public
+@mixin hide($fromBreakpoint: base, $untilBreakpoint: null) {
+  $_untilBreakpoint: if(lib.isNotNull($untilBreakpoint), $untilBreakpoint, xlarge);
+
+  @if(breakpoints.breakpoint($_untilBreakpoint) + 1 > breakpoints.breakpoint($fromBreakpoint)) {
+    @include breakpoints.mq($fromBreakpoint, $untilBreakpoint) {
+      display: none;
+    }
+  }
+
+  @else {
+    @error "You cannot use a `$untilBreakpoint` value smaller or equal than `$fromBreakpoint` value";
+  }
+}
+
+/// Create atom classes for hiders
+/// @access publi
+@mixin createAtoms() {
+  @each $fromBreakpointName, $fromBreakpointValue in breakpoints.$breakpoints {
+    $append: if(breakpoints.isBase($fromBreakpointName), "", "-from-#{$fromBreakpointName}");
+    .hide#{$append} {
+      @include hide($fromBreakpointName);
+    }
+
+    @each $untilBreakpointName, $untilBreakpointValue in breakpoints.$breakpoints {
+      @if($untilBreakpointValue > $fromBreakpointValue) {
+        .hide-from-#{$fromBreakpointName}-to-#{$untilBreakpointName} {
+          @include hide($fromBreakpointName, $untilBreakpointName);
+        }
+      }
+    }
+  }
+}
