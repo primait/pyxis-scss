@@ -6,12 +6,14 @@
 ////
 
 @use "../foundations/colors";
+@use "../foundations/containers";
 @use "../foundations/elevations";
 @use "../foundations/radius";
 @use "../foundations/spacings";
 @use "../foundations/typography";
 
 @include colors.createAtoms();
+@include containers.createAtoms();
 @include elevations.createAtoms();
 @include radius.createAtoms();
 @include spacings.createAtoms();

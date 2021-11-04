@@ -1,7 +1,7 @@
 ////
 /// Text is part of Typography. It's used in order to set the styles for a paragraph,
 /// or a generic content where hierarchy is not a matter.
-/// @group  TYPOGRAPHY
+/// @group TYPOGRAPHY
 ////
 
 /// Responsive text map
@@ -25,6 +25,7 @@ $fontSizes: (
 );
 
 /// List of allowed font weights for common text
+///
 /// @type List
 /// @access public
 $allowedFontWeights: (light, book, bold);

@@ -9,10 +9,11 @@
         "BREAKPOINTS": "Breakpoints",
         "COLORS": "Colors",
         "CONFIGURATION": "Configuration",
+        "CONTAINERS": "Containers",
         "ELEVATION": "Elevation",
         "LIB": "Core functions",
-        "SPACINGS": "Spacings",
         "RADIUS": "Radius",
+        "SPACINGS": "Spacings",
         "TYPOGRAPHY": "Typography",
         "undefined": "Globals"
     }

@@ -1,6 +1,6 @@
 ////
-/// These are the colours of our design system. Editing them will directly reflect on UI appereance.
-/// @group  COLORS
+/// These are the colours of our design system. Editing them will directly reflect on UI appearance.
+/// @group COLORS
 ////
 
 @use "../lib";
@@ -85,8 +85,8 @@ $_gradients: (
 /// Returns the $color hex from map $_colors
 ///
 /// @param {String} $color - Name of color
-/// @return {Color} Representation of named colorthrows {Error}
-///
+/// @return {Color} Representation of named color
+/// @throw {Error}
 /// @access public
 @function color($color) {
   @return lib.getOrDie($_colors, $color);
@@ -95,16 +95,15 @@ $_gradients: (
 /// Returns the $gradient from map $_gradients
 ///
 /// @param {String} $gradient - Name of gradient
-/// @return {Color} Representation of named colorthrows {Error}
-///
+/// @return {Color} Representation of named color
+/// @throw {Error}
 /// @access public
 @function gradient($gradient) {
   @return lib.getOrDie($_gradients, $gradient);
 }
 
 /// Create atom classes for all colors and gradient in $_colors map and $_gradients map
-///
-///  @access public
+/// @access public
 @mixin createAtoms() {
   @each $colorName, $colorValue in $_colors {
     .bg-#{lib.camelToKebabCase($colorName)} {

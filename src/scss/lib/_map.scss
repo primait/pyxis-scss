@@ -1,13 +1,14 @@
 ////
 /// Utilities for SCSS maps.
-/// @group  LIB
+/// @group LIB
+////
 
 /// Throw Error if $keys is not in map
 ///
 /// @param {Map} $map - A map
 /// @param {Args} $keys - Keys in map
 /// @return {Sass::Script::Value::Base}
-/// @throws {Error}
+/// @throw {Error}
 /// @access public
 @function getOrDie($map, $keys...) {
   @each $key in $keys {
