@@ -110,7 +110,7 @@ $_containers: (
 
   $_untilBreakpoint: if(lib.isNotNull($untilBreakpoint), $untilBreakpoint, xlarge);
 
-  @if(breakpoints.breakpoint($_untilBreakpoint) + 1 > breakpoints.breakpoint($fromBreakpoint)) {
+  @if (breakpoints.breakpoint($_untilBreakpoint) + 1 > breakpoints.breakpoint($fromBreakpoint)) {
     $_indexFromBreakpoint: index($_containers, $fromBreakpoint _container($fromBreakpoint));
 
     @for $i from $_indexFromBreakpoint through _lengthOfBreakpointCycle($untilBreakpoint) {
@@ -129,12 +129,12 @@ $_containers: (
 /// @access public
 @mixin createAtoms() {
   .container {
-    //@include container();
+    @include container();
   }
 
   @each $breakpoint, $value in map-remove($_containers, base) {
     .container-from-bp-#{$breakpoint} {
-      //@include container($breakpoint);
+      @include container($breakpoint);
     }
   }
 }
