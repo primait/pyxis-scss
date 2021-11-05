@@ -20,16 +20,12 @@
 ///  }
 ///
 ///  // Hide element from breakpoint medium
-///  // Until breakpoint medium, the element 
-///  // display property will be `grid`
 ///  .element {
 ///     display: grid;
 ///     @include hide(medium);
 ///  }
 ///
 ///  // Hide element between breakpoint small and large
-///  // Until breakpoint medium, the element 
-///  // display property will be `grid`
 ///  .element {
 ///     display: grid;
 ///     @include hide(small, large);
