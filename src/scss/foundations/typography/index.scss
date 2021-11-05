@@ -11,6 +11,7 @@
 @use "title";
 
 /// The font path
+///
 /// @type String
 /// @access private
 $_fontPath: "https://d3be8952cnveif.cloudfront.net/fonts";
@@ -22,8 +23,7 @@ $_fontPath: "https://d3be8952cnveif.cloudfront.net/fonts";
 /// @access private
 $_font: (
   name: "CircularXXWeb",
-  fallback: #{"Arial",
-  sans-serif},
+  fallback: "Arial, sans-serif",
   featureSettings: "ss08" on,
   weights: (
     light: 200,
