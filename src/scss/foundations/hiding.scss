@@ -34,7 +34,7 @@
 @mixin hide($fromBreakpoint: base, $untilBreakpoint: null) {
   $_untilBreakpoint: if(lib.isNotNull($untilBreakpoint), $untilBreakpoint, xlarge);
 
-  @if(breakpoints.breakpoint($_untilBreakpoint) + 1 > breakpoints.breakpoint($fromBreakpoint)) {
+  @if(breakpoints.isGreaterThan($_untilBreakpoint, $fromBreakpoint)) {
     @include breakpoints.mq($fromBreakpoint, $untilBreakpoint) {
       display: none;
     }
@@ -46,17 +46,16 @@
 /// Create atom classes for hiders
 /// @access public
 @mixin createAtoms() {
-  @each $fromBreakpointName, $fromBreakpointValue in breakpoints.$breakpoints {
-    $append: if(breakpoints.isBase($fromBreakpointName), "", "-from-#{$fromBreakpointName}");
+  $breakpointMap: breakpoints.breakpoints();
+  @each $breakpointName, $breakpointValue in $breakpointMap {
+    $append: if(breakpoints.isBase($breakpointName), "", "-from-#{$breakpointName}");
     .hide#{$append} {
-      @include hide($fromBreakpointName);
+      @include hide($breakpointName);
     }
-
-    @each $untilBreakpointName, $untilBreakpointValue in breakpoints.$breakpoints {
-      @if($untilBreakpointValue > $fromBreakpointValue) {
-        .hide-from-#{$fromBreakpointName}-to-#{$untilBreakpointName} {
-          @include hide($fromBreakpointName, $untilBreakpointName);
-        }
+    @if(not breakpoints.isBase($breakpointName)) {
+      $nextBreakpoint: lib.getNextElementKey($breakpointMap, $breakpointName $breakpointValue);
+      .hide-on-#{$breakpointName} {
+        @include hide($breakpointName, $nextBreakpoint);
       }
     }
   }

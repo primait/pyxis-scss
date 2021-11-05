@@ -17,8 +17,8 @@ $_breakpointXlarge: 1680px;
 /// The breakpoints of Pyxis
 ///
 /// @type Map
-/// @access public
-$breakpoints: (
+/// @access private
+$_breakpoints: (
   base: $_breakpointBase,
   xxsmall: $_breakpointXxsmall,
   xsmall: $_breakpointXsmall,
@@ -41,7 +41,16 @@ $_boundDiff: 1px;
 /// @throw {Error}
 /// @access public
 @function breakpoint($breakpoint) {
-  @return lib.getOrDie($breakpoints, $breakpoint);
+  @return lib.getOrDie($_breakpoints, $breakpoint);
+}
+
+/// Returns the entire $_breakpoints map
+///
+/// @return {Map} The breakpoint map
+/// @throw {Error}
+/// @access public
+@function breakpoints() {
+  @return $_breakpoints;
 }
 
 /// Check if the breakpoint is "base"
@@ -52,6 +61,40 @@ $_boundDiff: 1px;
 /// @access public
 @function isBase($breakpoint) {
   @return $breakpoint == base;
+}
+
+/// Check if breakpoint is lower or equal to `$upperBound`
+///
+/// @param {String} $breakpoint - Name of breakpoint
+/// @param {String} $upperBound - Name of breakpoint to compare with
+/// @return {Boolean}
+/// @throw {Error}
+/// @access public
+@function isLowerThan($breakpoint, $upperBound) {
+  @return breakpoint($breakpoint) <= breakpoint($upperBound);
+}
+
+/// Check if breakpoint is lower or equal to `$lowerBound`
+///
+/// @param {String} $breakpoint - Name of breakpoint
+/// @param {String} $lowerBound - Name of breakpoint to compare with
+/// @return {Boolean}
+/// @throw {Error}
+/// @access public
+@function isGreaterThan($breakpoint, $lowerBound) {
+  @return breakpoint($breakpoint) >= breakpoint($lowerBound);
+}
+
+/// Check if breakpoint is between `$lowerBound` and `$upperBound`
+///
+/// @param {String} $breakpoint - Name of breakpoint
+/// @param {String} $lowerBound - Name of the lower breakpoint to compare with
+/// @param {String} $upperBound - Name of the upper breakpoint to compare with
+/// @return {Boolean}
+/// @throw {Error}
+/// @access public
+@function isBetween($breakpoint, $lowerBound, $upperBound) {
+  @return isLowerThan($breakpoint, $upperBound) and isGreaterThan($breakpoint, $upperBound);
 }
 
 /// Wraps @content inside a media-query with a min-width and max-width (optional)

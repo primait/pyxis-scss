@@ -110,7 +110,7 @@ $_containers: (
 
   $_untilBreakpoint: if(lib.isNotNull($untilBreakpoint), $untilBreakpoint, xlarge);
 
-  @if (breakpoints.breakpoint($_untilBreakpoint) + 1 > breakpoints.breakpoint($fromBreakpoint)) {
+  @if (breakpoints.isGreaterThan($_untilBreakpoint, $fromBreakpoint)) {
     $_indexFromBreakpoint: index($_containers, $fromBreakpoint _container($fromBreakpoint));
 
     @for $i from $_indexFromBreakpoint through _lengthOfBreakpointCycle($untilBreakpoint) {
