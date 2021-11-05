@@ -1,0 +1,80 @@
+////
+/// Utility Classes are used for quick styling of components.
+/// @group UTILITIES
+////
+
+@use "../lib";
+@use "../foundations/typography";
+
+/// Utility properties map
+///
+/// @type Map
+/// @access private
+$_utilities: (
+  display: (
+    block, 
+    flex, 
+    grid, 
+    inline, 
+    inline-block
+  ),
+  position: (
+    relative
+  ),
+  text-align: (
+    center,
+    left, 
+    right
+  ),
+  text-decoration: (
+    line-through, 
+    none, 
+    underline
+  ),
+  text-transform: (
+    capitalize, 
+    lowercase,
+    uppercase
+  ),
+  user-select: (
+    none
+  )
+);
+
+/// Map of utility properties for width and height
+///
+/// @type Map
+/// @access private
+$_dimensionProperties: (width, height);
+
+
+/// Create atom classes for all utilities
+/// @access public
+@mixin createAtoms() {
+  @each $property, $propertyValues in $_utilities {
+    @each $value in $propertyValues {
+      .#{$property}-#{$value} {
+        #{$property}: $value;
+      }
+    }
+  }
+
+  @each $property in $_dimensionProperties {
+    .full-#{$property} {
+      #{$property}: 100%;
+    }
+  }
+  .text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .capitalize-first-letter:first-letter {
+    text-transform: uppercase;
+  }
+}
+
+
+
+ 

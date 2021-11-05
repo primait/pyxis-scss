@@ -5,6 +5,7 @@
 /// @group  ATOMS
 ////
 
+@use "./utilities.scss";
 @use "../foundations/colors";
 @use "../foundations/containers";
 @use "../foundations/elevations";
@@ -12,6 +13,7 @@
 @use "../foundations/spacings";
 @use "../foundations/typography";
 
+@include utilities.createAtoms();
 @include colors.createAtoms();
 @include containers.createAtoms();
 @include elevations.createAtoms();
