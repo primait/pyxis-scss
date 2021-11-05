@@ -48,9 +48,9 @@ You can install and use Pyxis foundations by following these steps:
 You can redefine some variables (those defined in `pyxis-scss/src/scss/config.scss`) by writing something like that:
 
 ```scss
-// Require the configuration module and override the $fontPath variable.
+// Require the configuration module and override the $fontDisplay variable.
 // Using the @use directive we ensure CSS is never repeated in case of multiple requirements.
-@use "~pyxis-scss/src/scss/config.scss" with ($fontPath: "~pyxis-scss/src/assets/fonts");
+@use "~pyxis-scss/src/scss/config.scss" with ($fontDisplay: "fallback");
 
 // Pyxis core module will now use your $fontPath variable.
 @forward "~pyxis-scss/src/scss/pyxis.scss";

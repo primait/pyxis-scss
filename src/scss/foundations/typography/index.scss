@@ -10,16 +10,20 @@
 @use "text";
 @use "title";
 
+/// The font path
+///
+/// @type String
+/// @access private
+$_fontPath: "https://d3be8952cnveif.cloudfront.net/fonts";
+
 /// The font setting map
 /// The "ss08" featureSettings allows to make numbers tall as uppercase letters
 ///
 /// @type Map
 /// @access private
-
 $_font: (
   name: "CircularXXWeb",
-  fallback: #{"Arial",
-  sans-serif},
+  fallback: "Arial, sans-serif",
   featureSettings: "ss08" on,
   weights: (
     light: 200,
@@ -169,8 +173,8 @@ $_letterSpacing: (
       font-family: lib.getOrDie($_font, name);
       font-style: normal;
       font-weight: $weight;
-      src: url("#{config.$fontPath}/#{$fileName}.woff") format("woff"),
-        url("#{config.$fontPath}/#{$fileName}.woff2") format("woff2");
+      src: url("#{$_fontPath}/#{$fileName}.woff") format("woff"),
+        url("#{$_fontPath}/#{$fileName}.woff2") format("woff2");
     }
   }
 }
