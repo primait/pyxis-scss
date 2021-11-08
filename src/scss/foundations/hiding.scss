@@ -42,6 +42,7 @@
 }
 
 /// Create atom classes for hiding
+///
 /// @access public
 @mixin createAtoms() {
   $breakpointMap: breakpoints.breakpoints();
