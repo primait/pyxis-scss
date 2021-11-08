@@ -43,10 +43,13 @@
 /// @access public
 @function getNextElementKey($map, $currentItem) {
   $currentIndex: index($map, $currentItem);
-  $nextElementIndex: $currentIndex + 1;
-  @if($currentIndex != length($map)) {
-    @return indexToKey($nextElementIndex, $map);
-  } @else {
-    @return null;
+  @if $currentIndex {
+    $nextElementIndex: $currentIndex + 1;
+    @if($currentIndex != length($map)) {
+      @return indexToKey($nextElementIndex, $map);
+    } @else {
+      @return null;
+    }
   }
+  @error "Unknown key `#{$currentItem}` in map";
 }
