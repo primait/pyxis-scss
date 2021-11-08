@@ -63,7 +63,7 @@ $_boundDiff: 1px;
   @return $breakpoint == base;
 }
 
-/// Check if breakpoint is lower or equal to `$upperBound`
+/// Check if breakpoint is lower than `$upperBound`
 ///
 /// @param {String} $breakpoint - Name of breakpoint
 /// @param {String} $upperBound - Name of breakpoint to compare with
@@ -71,10 +71,10 @@ $_boundDiff: 1px;
 /// @throw {Error}
 /// @access public
 @function isLowerThan($breakpoint, $upperBound) {
-  @return breakpoint($breakpoint) <= breakpoint($upperBound);
+  @return breakpoint($breakpoint) < breakpoint($upperBound);
 }
 
-/// Check if breakpoint is lower or equal to `$lowerBound`
+/// Check if breakpoint is greater than `$lowerBound`
 ///
 /// @param {String} $breakpoint - Name of breakpoint
 /// @param {String} $lowerBound - Name of breakpoint to compare with
@@ -82,19 +82,40 @@ $_boundDiff: 1px;
 /// @throw {Error}
 /// @access public
 @function isGreaterThan($breakpoint, $lowerBound) {
-  @return breakpoint($breakpoint) >= breakpoint($lowerBound);
+  @return breakpoint($breakpoint) > breakpoint($lowerBound);
 }
 
-/// Check if breakpoint is between `$lowerBound` and `$upperBound`
+/// Check if breakpoint is equal to `$otherTerm`
 ///
 /// @param {String} $breakpoint - Name of breakpoint
-/// @param {String} $lowerBound - Name of the lower breakpoint to compare with
-/// @param {String} $upperBound - Name of the upper breakpoint to compare with
+/// @param {String} $otherTerm - Name of breakpoint to compare with
 /// @return {Boolean}
 /// @throw {Error}
 /// @access public
-@function isBetween($breakpoint, $lowerBound, $upperBound) {
-  @return isLowerThan($breakpoint, $upperBound) and isGreaterThan($breakpoint, $upperBound);
+@function isEqualTo($breakpoint, $otherTerm) {
+  @return breakpoint($breakpoint) == breakpoint($otherTerm);
+}
+
+/// Check if breakpoint is greater than or equal to `$upperBound`
+///
+/// @param {String} $breakpoint - Name of breakpoint
+/// @param {String} $upperBound - Name of breakpoint to compare with
+/// @return {Boolean}
+/// @throw {Error}
+/// @access public
+@function isGreaterOrEqualTo($breakpoint, $upperBound) {
+  @return isGreaterThan($breakpoint, $upperBound) or isEqualTo($breakpoint, $upperBound);
+}
+
+/// Check if breakpoint is lower than or equal to `$lowerBound`
+///
+/// @param {String} $breakpoint - Name of breakpoint
+/// @param {String} $lowerBound - Name of breakpoint to compare with
+/// @return {Boolean}
+/// @throw {Error}
+/// @access public
+@function isLowerOrEqualTo($breakpoint, $lowerBound) {
+  @return isLowerThan($breakpoint, $lowerBound) or isEqualTo($breakpoint, $lowerBound);
 }
 
 /// Wraps @content inside a media-query with a min-width and max-width (optional)

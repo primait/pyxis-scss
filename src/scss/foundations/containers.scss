@@ -108,20 +108,18 @@ $_containers: (
   display: grid;
   margin: 0 auto;
 
-  $_untilBreakpoint: if(lib.isNotNull($untilBreakpoint), $untilBreakpoint, xlarge);
-
-  @if (breakpoints.isGreaterThan($_untilBreakpoint, $fromBreakpoint)) {
-    $_indexFromBreakpoint: index($_containers, $fromBreakpoint _container($fromBreakpoint));
-
-    @for $i from $_indexFromBreakpoint through _lengthOfBreakpointCycle($untilBreakpoint) {
-      $_containerFromBreakpoint: nth(nth($_containers, $i), 1);
-
-      @include breakpoints.mq($_containerFromBreakpoint, _untilBreakpoint($untilBreakpoint, $i)) {
-        max-width: _container($_containerFromBreakpoint);
-      }
-    }
-  } @else {
+  @if(lib.isNotNull($untilBreakpoint) and breakpoints.isGreaterOrEqualTo($fromBreakpoint, $untilBreakpoint)) {
     @error "You cannot use a `$untilBreakpoint` value smaller or equal than `$fromBreakpoint` value";
+  }
+
+  $_indexFromBreakpoint: index($_containers, $fromBreakpoint _container($fromBreakpoint));
+
+  @for $i from $_indexFromBreakpoint through _lengthOfBreakpointCycle($untilBreakpoint) {
+    $_containerFromBreakpoint: nth(nth($_containers, $i), 1);
+
+    @include breakpoints.mq($_containerFromBreakpoint, _untilBreakpoint($untilBreakpoint, $i)) {
+      max-width: _container($_containerFromBreakpoint);
+    }
   }
 }
 
@@ -133,7 +131,7 @@ $_containers: (
   }
 
   @each $breakpoint, $value in map-remove($_containers, base) {
-    .container-from-bp-#{$breakpoint} {
+    .container-from-#{$breakpoint} {
       @include container($breakpoint);
     }
   }

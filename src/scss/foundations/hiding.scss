@@ -32,18 +32,16 @@
 ///  }
 /// @access public
 @mixin hide($fromBreakpoint: base, $untilBreakpoint: null) {
-  $_untilBreakpoint: if(lib.isNotNull($untilBreakpoint), $untilBreakpoint, xlarge);
-
-  @if(breakpoints.isGreaterThan($_untilBreakpoint, $fromBreakpoint)) {
-    @include breakpoints.mq($fromBreakpoint, $untilBreakpoint) {
-      display: none;
-    }
-  } @else {
+  @if(lib.isNotNull($untilBreakpoint) and breakpoints.isGreaterOrEqualTo($fromBreakpoint, $untilBreakpoint)) {
     @error "You cannot use a `$untilBreakpoint` value smaller or equal than `$fromBreakpoint` value";
+  }
+
+  @include breakpoints.mq($fromBreakpoint, $untilBreakpoint) {
+    display: none;
   }
 }
 
-/// Create atom classes for hiders
+/// Create atom classes for hiding
 /// @access public
 @mixin createAtoms() {
   $breakpointMap: breakpoints.breakpoints();
