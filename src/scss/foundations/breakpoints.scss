@@ -44,6 +44,15 @@ $_boundDiff: 1px;
   @return lib.getOrDie($_breakpoints, $breakpoint);
 }
 
+/// Returns the entire $_breakpoints map
+///
+/// @return {Map} The breakpoint map
+/// @throw {Error}
+/// @access public
+@function breakpoints() {
+  @return $_breakpoints;
+}
+
 /// Check if the breakpoint is "base"
 ///
 /// @param {String} $breakpoint - Name of breakpoint
@@ -52,6 +61,61 @@ $_boundDiff: 1px;
 /// @access public
 @function isBase($breakpoint) {
   @return $breakpoint == base;
+}
+
+/// Check if breakpoint is lower than `$upperBound`
+///
+/// @param {String} $breakpoint - Name of breakpoint
+/// @param {String} $upperBound - Name of breakpoint to compare with
+/// @return {Boolean}
+/// @throw {Error}
+/// @access public
+@function isLowerThan($breakpoint, $upperBound) {
+  @return breakpoint($breakpoint) < breakpoint($upperBound);
+}
+
+/// Check if breakpoint is greater than `$lowerBound`
+///
+/// @param {String} $breakpoint - Name of breakpoint
+/// @param {String} $lowerBound - Name of breakpoint to compare with
+/// @return {Boolean}
+/// @throw {Error}
+/// @access public
+@function isGreaterThan($breakpoint, $lowerBound) {
+  @return breakpoint($breakpoint) > breakpoint($lowerBound);
+}
+
+/// Check if breakpoint is equal to `$otherTerm`
+///
+/// @param {String} $breakpoint - Name of breakpoint
+/// @param {String} $otherTerm - Name of breakpoint to compare with
+/// @return {Boolean}
+/// @throw {Error}
+/// @access public
+@function isEqualTo($breakpoint, $otherTerm) {
+  @return breakpoint($breakpoint) == breakpoint($otherTerm);
+}
+
+/// Check if breakpoint is greater than or equal to `$upperBound`
+///
+/// @param {String} $breakpoint - Name of breakpoint
+/// @param {String} $upperBound - Name of breakpoint to compare with
+/// @return {Boolean}
+/// @throw {Error}
+/// @access public
+@function isGreaterOrEqualTo($breakpoint, $upperBound) {
+  @return isGreaterThan($breakpoint, $upperBound) or isEqualTo($breakpoint, $upperBound);
+}
+
+/// Check if breakpoint is lower than or equal to `$lowerBound`
+///
+/// @param {String} $breakpoint - Name of breakpoint
+/// @param {String} $lowerBound - Name of breakpoint to compare with
+/// @return {Boolean}
+/// @throw {Error}
+/// @access public
+@function isLowerOrEqualTo($breakpoint, $lowerBound) {
+  @return isLowerThan($breakpoint, $lowerBound) or isEqualTo($breakpoint, $lowerBound);
 }
 
 /// Wraps @content inside a media-query with a min-width and max-width (optional)

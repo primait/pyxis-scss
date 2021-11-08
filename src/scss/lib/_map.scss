@@ -20,3 +20,36 @@
 
   @return $map;
 }
+
+/// Return the key corresponding to the index in input
+///
+/// @param {Number} $index - The index
+/// @param {Map} $map - A map
+/// @return {String} The corrisponding key
+/// @throw {Error}
+/// @access public
+@function indexToKey($index, $map) {
+  $keys: map-keys($map);
+  @return nth($keys, $index);
+}
+
+/// Return the key of the element with the
+/// following index in the map
+///
+/// @param {Map} $map - A map
+/// @param {String} $currentItem - The current item (Key value)
+/// @return {String:Null} The corrisponding key or null
+/// @throw {Error}
+/// @access public
+@function getNextElementKey($map, $currentItem) {
+  $currentIndex: index($map, $currentItem);
+  @if $currentIndex {
+    $nextElementIndex: $currentIndex + 1;
+    @if($currentIndex != length($map)) {
+      @return indexToKey($nextElementIndex, $map);
+    } @else {
+      @return null;
+    }
+  }
+  @error "Unknown key `#{$currentItem}` in map";
+}
