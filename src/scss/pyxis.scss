@@ -5,7 +5,3 @@
 /// Pyxis foundations
 @use "foundations" as pyxis;
 @use "atoms";
-
-html {
-  @include pyxis.typographyGlobalSettings();
-}
