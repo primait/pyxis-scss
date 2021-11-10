@@ -11,25 +11,31 @@
 ///
 /// @param {String} $fromBreakpoint - Name of start breakpoint
 /// @param {String} $untilBreakpoint - Name of end breakpoint
-/// @throw {Error}
 ///
-/// @example scss - Hide Mixin
-///  // Hide the element for every breakpoints
+/// @output `display:none;` between breakpoints in input.
+///
+/// @example scss - Hide element for every breakpoint
 ///  .element {
 ///     @include hide();
 ///  }
 ///
-///  // Hide element from breakpoint medium
+/// @example scss - Hide element from breakpoint medium
 ///  .element {
 ///     display: grid;
 ///     @include hide(medium);
 ///  }
+///  // Before medium breakpoint the display property is set 
+///  // to `grid`, after to `none`.
 ///
-///  // Hide element between breakpoint small and large
+/// @example scss - Hide element between breakpoint small and large
 ///  .element {
 ///     display: grid;
 ///     @include hide(small, large);
 ///  }
+///  // Outside the range between small and large breakpoint the display property 
+///  // is set to `grid`, inside to `none`.
+///
+/// @throw Error if `$untilBreakpoint` is smaller or equal to `$fromBreakpoint`.
 /// @access public
 @mixin hide($fromBreakpoint: base, $untilBreakpoint: null) {
   @if(lib.isNotNull($untilBreakpoint) and breakpoints.isGreaterOrEqualTo($fromBreakpoint, $untilBreakpoint)) {
@@ -43,6 +49,7 @@
 
 /// Create atom classes for hiding
 ///
+/// @alias createAtoms
 /// @access public
 @mixin createAtoms() {
   $breakpointMap: breakpoints.breakpoints();

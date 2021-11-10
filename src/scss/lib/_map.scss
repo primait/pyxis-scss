@@ -3,12 +3,18 @@
 /// @group LIB
 ////
 
-/// Throw Error if $keys is not in map
+/// Retrieve the value corresponding to
+/// the key in a given map.
 ///
 /// @param {Map} $map - A map
 /// @param {Args} $keys - Keys in map
-/// @return {Sass::Script::Value::Base}
-/// @throw {Error}
+/// @return {Sass::Script::Value::Base} The corresponding value
+///
+/// @example scss - Retrieve brand base color from colors map
+///   getOrDie($colors, brandBase)
+///   // #8334c2
+///
+/// @throw Error if `$keys` is not in map.
 /// @access public
 @function getOrDie($map, $keys...) {
   @each $key in $keys {
@@ -22,11 +28,16 @@
 }
 
 /// Return the key corresponding to the index in input
+/// in a given map.
 ///
 /// @param {Number} $index - The index
 /// @param {Map} $map - A map
 /// @return {String} The corrisponding key
-/// @throw {Error}
+///
+/// @example scss - Retrieve the key at index 5 in colors map
+///   indexToKey(5, $colors)
+///   // alertDark
+///
 /// @access public
 @function indexToKey($index, $map) {
   $keys: map-keys($map);
@@ -34,12 +45,17 @@
 }
 
 /// Return the key of the element with the
-/// following index in the map
+/// index following the item in input in a given map.
 ///
 /// @param {Map} $map - A map
 /// @param {String} $currentItem - The current item (Key value)
 /// @return {String:Null} The corrisponding key or null
-/// @throw {Error}
+///
+/// @example scss - Retrieve the key of the item next to `actionDark` in colors map
+///   getNextElementKey($colors, actionDark #045767)
+///   // actionLight
+///
+/// @throw Error if `$currentItem` is not in map.
 /// @access public
 @function getNextElementKey($map, $currentItem) {
   $currentIndex: index($map, $currentItem);

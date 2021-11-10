@@ -18,11 +18,35 @@ $_radius: (
   xs: 5px,
 );
 
+/// Border radius map.
+///
+/// @prop {Number} xl [25px]
+/// @prop {Number} l [20px]
+/// @prop {Number} m [15px]
+/// @prop {Number} s [10px]
+/// @prop {Number} xs [5px]
+///
+/// @type Map
+/// @access public
+$radius: ();
+
 /// List of allowed edges for border-radius
 ///
 /// @type List
 /// @access private
 $_edges: (all, top, right, bottom, left);
+
+/// List of allowed edges for border-radius.
+/// 
+/// @prop {String} all
+/// @prop {String} top
+/// @prop {String} right
+/// @prop {String} bottom
+/// @prop {String} left
+///
+/// @type List
+/// @access public
+$edges: ();
 
 /// Returns the radius value from map $_radius
 ///
@@ -34,11 +58,23 @@ $_edges: (all, top, right, bottom, left);
   @return lib.rem(lib.getOrDie($_radius, $size));
 }
 
-/// Includes border-radius by size and edge
+/// Includes border-radius by size and edge.
 ///
 /// @param {String} $size - Name of the size
-/// @param {String} $edge - Edge to apply the border-radius
-/// @throw {Error}
+/// @param {String} $edge [all] - Edge to apply the border-radius
+///
+/// @output `border-radius` property.
+///
+/// @example scss - Set radius to all edges
+///   .element {
+///     @include radius(s);
+///   }
+/// @example scss - Set radius only on bottom right and bottom left edges
+///   .element {
+///     @include radius(l, bottom);
+///   }
+///
+/// @throw Error if `$edge` in input is not present in `$edges` list
 /// @access public
 @mixin radius($size, $edge: all) {
   @if index($_edges, $edge) {
@@ -59,6 +95,8 @@ $_edges: (all, top, right, bottom, left);
 }
 
 /// Create atom classes for all radius in $_radius map
+///
+/// @alias createAtoms
 /// @access public
 @mixin createAtoms() {
   @each $size, $_ in $_radius {

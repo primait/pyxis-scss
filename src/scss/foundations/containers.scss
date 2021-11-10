@@ -78,31 +78,34 @@ $_containers: (
   @return null;
 }
 
-/// Include a container by $fromBreakpoint to $toBreakpoint value
+/// Include a container by `$fromBreakpoint` to `$toBreakpoint` value,
 /// outside the indicated breakpoints the container will be fluid.
 /// The container is based on `display: grid;` property.
 ///
-/// @param {String} $fromBreakpoint - Name of start breakpoint
-/// @param {String} $toBreakpoint - Name of end breakpoint
-/// @throw {Error}
+/// @param {String} $fromBreakpoint [base] - Name of start breakpoint
+/// @param {String} $toBreakpoint [null] - Name of end breakpoint
 ///
-/// @example scss - Container Mixin
-///  // Include a container width for every breakpoints
-///  .wrapper {
+/// @output Appropriate `max-width` based on breakpoints. Also `display: grid;`
+/// and `margin: 0 auto;`.
+///
+/// @example scss - Include a container with different width for every breakpoint
+///   .wrapper {
 ///     @include container();
-///  }
+///   }
 ///
-///  // Include container from breakpoint small
-///  // Until breakpoint small, the container will be fluid
-///  .wrapper {
+/// @example scss - Include container from breakpoint small.
+///   .wrapper {
 ///     @include container(small);
-///  }
+///   }
+///   // Until breakpoint small, the container will be fluid
 ///
-///  // Include container between breakpoint small and large
-///  // Out of the range the container will be fluid
-///  .wrapper {
+/// @example scss - Include container between breakpoint small and large
+///   .wrapper {
 ///     @include container(small, large);
-///  }
+///   }
+///   // Out of the range the container will be fluid
+///
+/// @throw Error if `$fromBreakpoint` value is lower or equal to `$untilBreakpoint` value
 /// @access public
 @mixin container($fromBreakpoint: base, $untilBreakpoint: null) {
   display: grid;
@@ -124,6 +127,8 @@ $_containers: (
 }
 
 /// Create atom classes for containers
+///
+/// @alias createAtoms
 /// @access public
 @mixin createAtoms() {
   .container {
