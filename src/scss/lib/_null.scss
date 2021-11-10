@@ -5,15 +5,17 @@
 
 /// Check if value is null.
 ///
-/// @param {String} $value - The value to check
+/// @param {Any} $value - The value to check
 /// @return {Bool}
 ///
 /// @example scss - Check if `$value` is null
 ///   $value: "string";
+///
 ///   isNull($value)
 ///   // false
 /// @example scss - Check if `$value` is null
 ///   $value: null;
+///
 ///   isNull($value)
 ///   // true
 ///
@@ -24,15 +26,17 @@
 
 /// Check if value is not null.
 ///
-/// @param {String} $value - The value to check
+/// @param {Any} $value - The value to check
 /// @return {Bool}
 ///
 /// @example scss - Check if `$value` is not null
 ///   $value: "string";
+///
 ///   isNotNull($value)
 ///   // true
 /// @example scss - Check if `$value` is not null
 ///   $value: null;
+///
 ///   isNotNull($value)
 ///   // false
 ///
