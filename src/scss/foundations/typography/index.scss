@@ -17,7 +17,7 @@
 $_fontPath: "https://d3be8952cnveif.cloudfront.net/fonts";
 
 /// The font setting map
-/// The "ss08" featureSettings allows to make numbers tall as uppercase letters
+/// The `ss08` featureSettings allows to make numbers tall as uppercase letters
 ///
 /// @type Map
 /// @access private
@@ -61,7 +61,7 @@ $_letterSpacing: (
   @return #{lib.getOrDie($font, name), lib.getOrDie($font, fallback)};
 }
 
-/// Returns a line-height by $fontSize
+/// Returns a line-height by `$fontSize`
 ///
 /// @param {Number} $fontSize - The font-size to apply the line-height to
 /// @return {Number} - A line-height represented in percentage
@@ -73,7 +73,7 @@ $_letterSpacing: (
   @return if($shouldUseBaseLineHeight, lib.getOrDie($_lineHeight, base), lib.getOrDie($_lineHeight, golden));
 }
 
-/// Returns a letter-spacing by $fontSize
+/// Returns a letter-spacing by `$fontSize`
 ///
 /// @param {Number} $fontSize - The font-size to apply the letter-spacing to
 /// @return {Number} - A letter-spacing represented in rem
@@ -94,8 +94,10 @@ $_letterSpacing: (
   }
 }
 
-/// Base setting for Pyxis typography
-/// To be used only in the html tag
+/// Base setting for Pyxis typography.
+/// It has to be used only in the html tag.
+///
+/// @alias typographyGlobalSettings
 /// @access public
 @mixin typographyGlobalSettings() {
   @include _fontWeight(book);
@@ -108,7 +110,7 @@ $_letterSpacing: (
   text-rendering: optimizeLegibility;
 }
 
-/// Include the font-weight value by name
+/// Include the font-weight value by name.
 ///
 /// @param {String} $weight - The name of the weight
 /// @throw {Error}
@@ -117,10 +119,10 @@ $_letterSpacing: (
   font-weight: #{lib.getOrDie($_font, weights, $weight)};
 }
 
-/// Includes the properties contained in the typography map in every breakpoints
+/// Includes the properties contained in the typography map for every breakpoint
 ///
 /// @param {Map} $fontSizes - The map of fontSize
-/// @param {String} $size - Name of the $size
+/// @param {String} $size - The name of the size
 /// @throw {Error}
 /// @access private
 @mixin _size($fontSizes, $size) {
@@ -135,11 +137,24 @@ $_letterSpacing: (
   }
 }
 
-/// Include the responsive title size by name available in title.$fontSizes
+/// Include the responsive title size by name available in `title.$fontSizes`.
 ///
 /// @param {String} $size - The name of the size
 /// @param {String} $weight - The name of the weight
-/// @throw {Error}
+///
+/// @output Appropriate `font-size`, `letter-spacing`, `line-height`
+/// and `font-weight` for each breakpoint.
+///
+/// @example scss - Title of XL size
+/// .title {
+///  @include title(xl, bold)
+/// }
+/// @example scss - Bold title of M size
+/// .title {
+///  @include title(m, bold)
+/// }
+///
+/// @throw Error if font-weight `$weight` in input is not allowed in titles
 /// @access public
 @mixin title($size, $weight) {
   @include _size(title.$fontSizes, $size);
@@ -151,18 +166,31 @@ $_letterSpacing: (
   }
 }
 
-/// Include the responsive text size by name available in text.$fontSizes
+/// Include the responsive text size by name available in `text.$fontSizes`.
 ///
-/// @param {String} $size - The name of the size
+/// @param {String} $size - The name of the size: 
 /// @param {String} $weight - The name of the weight
-/// @throw {Error}
+///
+/// @output Appropriate `font-size`, `letter-spacing`, `line-height`
+/// and `font-weight` for each breakpoint.
+///
+/// @example scss - Text of L size
+///   .text {
+///     @include text(l, bold)
+///   }
+/// @example scss - Light text of M size
+///   .text {
+///     @include text(m, bold)
+///   }
+///
 /// @access public
 @mixin text($size, $weight) {
   @include _fontWeight($weight);
   @include _size(text.$fontSizes, $size);
 }
 
-/// Create @font-face for all fonts available in $_fonts map
+/// Create `@font-face` for all fonts available in `$_fonts` map.
+///
 /// @access public
 @mixin fontFaces() {
   @each $name, $weight in lib.getOrDie($_font, weights) {
@@ -180,6 +208,8 @@ $_letterSpacing: (
 }
 
 /// Create atom classes for all title and text variant
+///
+/// @alias createAtoms
 /// @access public
 @mixin createAtoms() {
   @each $size, $_ in title.$fontSizes {

@@ -1,11 +1,16 @@
 {
+    "autofill": [],
     "display": {
         "access": [
             "public"
         ],
-        "alias": true,
+        "alias": false,
         "watermark": false
     },
+    "exclude": [
+        "scss/foundations/typography/text.scss",
+        "scss/foundations/typography/title.scss"
+    ],
     "groups": {
         "ATOMS": "Atoms",
         "BREAKPOINTS": "Breakpoints",

@@ -52,6 +52,22 @@ $_spacings: (
   ),
 );
 
+/// Spacing list.  
+/// <em style="font-size:small;">This variable is private.</em>
+///
+/// @prop {String} xxxl
+/// @prop {String} xxl
+/// @prop {String} xl
+/// @prop {String} l
+/// @prop {String} m
+/// @prop {String} s
+/// @prop {String} xs
+/// @prop {String} xxs
+/// @prop {String} xxxs
+///
+/// @type List
+$_spacingsList: ();
+
 /// Includes the size contained in the spacings map on property in every breakpoints
 ///
 /// @param {String} $property - Name of the property
@@ -70,41 +86,68 @@ $_spacings: (
   }
 }
 
-/// Includes equal padding by size contained in the spacings map in every breakpoints.
+/// Includes equal padding by size in every breakpoints.
 ///
-/// @param {String} $size - Name of the size
-/// @throw {Error}
+/// @param {String} $size - A size from `$_spacingList`
+/// 
+/// @output `padding` property.
+///
+/// @example scss - Set equal padding in every direction
+///  .element {
+///     @include padding(s);
+///  }
+///
 /// @access public
 @mixin padding($size) {
   @include _spacing("padding", $size);
 }
 
-/// Includes unequal padding for vertical edge
-/// by size contained in the spacings map in every breakpoints.
+/// Includes padding by size for vertical edges in every breakpoints.
 ///
-/// @param {String} $size - Name of the size
-/// @throw {Error}
+/// @param {String} $size - A size from `$_spacingList`
+/// 
+/// @output `padding-bottom` and `padding-top` properties.
+///
+/// @example scss - Set vertical padding 
+///  .element {
+///     @include verticalPadding(s);
+///  }
+/// 
 /// @access public
 @mixin verticalPadding($size) {
   @include _spacing("padding-bottom", $size);
   @include _spacing("padding-top", $size);
 }
 
-/// Includes unequal padding for horizontal edge
-/// by size contained in the spacings map in every breakpoints.
+/// Includes padding by size for horizontal edges in every breakpoints.
 ///
-/// @param {String} $size - Name of the size
-/// @throw {Error}
+/// @param {String} $size - A size from `$_spacingList`
+///
+/// @output `padding-right` and `padding-left` properties.
+///
+/// @example scss - Set vertical padding 
+///  .element {
+///     @include horizontalPadding(s);
+///  }
+/// 
 /// @access public
 @mixin horizontalPadding($size) {
   @include _spacing("padding-left", $size);
   @include _spacing("padding-right", $size);
 }
 
-/// Includes margin-bottom by size contained in the spacings map in every breakpoints.
+/// Includes `margin-bottom` by size in every breakpoint.
 ///
-/// @param {String} $size - Name of the size
-/// @throw {Error}
+/// @param {String} $size - A size from `$_spacingList`
+///
+/// @output `margin-bottom` property. If the element is `last-child`
+/// the property is set to `0`, regardless of the specified size.
+///
+/// @example scss - Set margin bottom 
+///  .element {
+///     @include verticalSpacing(s);
+///  }
+/// 
 /// @access public
 @mixin verticalSpacing($size) {
   @include _spacing("margin-bottom", $size);
@@ -114,10 +157,18 @@ $_spacings: (
   }
 }
 
-/// Includes margin-right by size contained in the spacings map in every breakpoints.
+/// Includes `margin-right` by size in every breakpoints.
 ///
-/// @param {String} $size - Name of the size
-/// @throw {Error}
+/// @param {String} $size - A size from `$_spacingList`
+///
+/// @output `margin-right` property. If the element is `last-child`
+/// the property is set to `0`, regardless of the specified size.
+///
+/// @example scss - Set margin right 
+///  .element {
+///     @include horizontalSpacing(s);
+///  }
+/// 
 /// @access public
 @mixin horizontalSpacing($size) {
   @include _spacing("margin-right", $size);
@@ -127,28 +178,47 @@ $_spacings: (
   }
 }
 
-/// Includes grid-row-gap by size contained in the spacings map in every breakpoints
-/// Same as verticalSpacing(), but used to space out vertical elements in case a grid is used (display: grid).
+/// Includes `grid-row-gap` by size in every breakpoints
+/// Same as `verticalSpacing()`, but used to space out vertical elements 
+/// in case a grid is used (`display: grid;`).
 ///
-/// @param {String} $size - Name of the size
-/// @throw {Error}
+/// @param {String} $size - A size from `$_spacingList`
+///
+/// @output `grid-row-gap` property.
+///
+/// @example scss - Set vertical gap in a grid environment 
+///  .element {
+///     display: grid;
+///     @include rowGap(s);
+///  }
+/// 
 /// @access public
-////
 @mixin rowGap($size) {
   @include _spacing("grid-row-gap", $size);
 }
 
-/// Includes grid-column-gap by size contained in the spacings map in every breakpoints
-/// Like horizontalSpacing(), but used to space out horizontal elements in case a grid is used (display: grid).
+/// Includes `grid-column-gap` by size in every breakpoints
+/// Like `horizontalSpacing()`, but used to space out horizontal elements 
+/// in case a grid is used (`display: grid;`).
 ///
-/// @param {String} $size - Name of the size
-/// @throw {Error}
+/// @param {String} $size - A size from `$_spacingList`
+///
+/// @output `grid-column-gap` property.
+///
+/// @example scss - Set horizontal gap in a grid environment 
+///  .element {
+///     display: grid;
+///     @include columnGap(s);
+///  }
+/// 
 /// @access public
 @mixin columnGap($size) {
   @include _spacing("grid-column-gap", $size);
 }
 
 /// Create atom classes for all spacing in $_spacings map
+///
+/// @alias createAtoms
 /// @access public
 @mixin createAtoms() {
   @each $size, $_ in $_spacings {
