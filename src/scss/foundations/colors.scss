@@ -143,7 +143,7 @@ $_gradientsMap: ();
 ///
 /// @example scss - Get the linear-gradient
 ///   gradient(brand)
-///   // linear-gradient(45deg, $_colorBrandBase, $_colorBrandLight)
+///   // linear-gradient(45deg, #8334c2, #f2eaf8)
 ///
 /// @access public
 @function gradient($gradient) {
