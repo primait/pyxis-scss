@@ -53,6 +53,7 @@ $_spacings: (
 );
 
 /// Spacing list.
+/// @ignore This variable is useful only in sassdoc documentation
 ///
 /// @prop {String} xxxl
 /// @prop {String} xxl
@@ -65,8 +66,7 @@ $_spacings: (
 /// @prop {String} xxxs
 ///
 /// @type List
-/// @access public
-$spacings: ();
+$_spacingsList: ();
 
 /// Includes the size contained in the spacings map on property in every breakpoints
 ///
@@ -88,7 +88,7 @@ $spacings: ();
 
 /// Includes equal padding by size in every breakpoints.
 ///
-/// @param {String} $size - A size from `$spacing`
+/// @param {String} $size - A size from `$_spacingList`
 /// 
 /// @output `padding` property.
 ///
@@ -104,7 +104,7 @@ $spacings: ();
 
 /// Includes padding by size for vertical edges in every breakpoints.
 ///
-/// @param {String} $size - A size from `$spacing`
+/// @param {String} $size - A size from `$_spacingList`
 /// 
 /// @output `padding-bottom` and `padding-top` properties.
 ///
@@ -121,7 +121,7 @@ $spacings: ();
 
 /// Includes padding by size for horizontal edges in every breakpoints.
 ///
-/// @param {String} $size - A size from `$spacing`
+/// @param {String} $size - A size from `$_spacingList`
 ///
 /// @output `padding-right` and `padding-left` properties.
 ///
@@ -138,7 +138,7 @@ $spacings: ();
 
 /// Includes `margin-bottom` by size in every breakpoint.
 ///
-/// @param {String} $size - A size from `$spacing`
+/// @param {String} $size - A size from `$_spacingList`
 ///
 /// @output `margin-bottom` property. If the element is `last-child`
 /// the property is set to `0`, regardless of the specified size.
@@ -159,7 +159,7 @@ $spacings: ();
 
 /// Includes `margin-right` by size in every breakpoints.
 ///
-/// @param {String} $size - A size from `$spacing`
+/// @param {String} $size - A size from `$_spacingList`
 ///
 /// @output `margin-right` property. If the element is `last-child`
 /// the property is set to `0`, regardless of the specified size.
@@ -182,7 +182,7 @@ $spacings: ();
 /// Same as `verticalSpacing()`, but used to space out vertical elements 
 /// in case a grid is used (`display: grid;`).
 ///
-/// @param {String} $size - A size from `$spacing`
+/// @param {String} $size - A size from `$_spacingList`
 ///
 /// @output `grid-row-gap` property.
 ///
@@ -201,7 +201,7 @@ $spacings: ();
 /// Like `horizontalSpacing()`, but used to space out horizontal elements 
 /// in case a grid is used (`display: grid;`).
 ///
-/// @param {String} $size - A size from `$spacing`
+/// @param {String} $size - A size from `$_spacingList`
 ///
 /// @output `grid-column-gap` property.
 ///

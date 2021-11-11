@@ -29,8 +29,8 @@ $_breakpoints: (
 );
 
 /// The breakpoints of Pyxis.
+/// @ignore This variable is useful only in sassdoc documentation
 ///
-/// @type Map
 /// @prop {Number} base [1px]
 /// @prop {Number} xxsmall [375px]
 /// @prop {Number} xsmall [576px]
@@ -38,9 +38,9 @@ $_breakpoints: (
 /// @prop {Number} medium [992px]
 /// @prop {Number} large [1200px]
 /// @prop {Number} xlarge [1680px]
-///
-/// @access public
-$breakpoints: ();
+/// 
+/// @type Map
+$_breakpointMap: ();
 
 /// Breakpoint bounding difference
 ///
@@ -48,7 +48,7 @@ $breakpoints: ();
 /// @access private
 $_boundDiff: 1px;
 
-/// Returns the `$breakpoint` value from map `$breakpoints`
+/// Returns the `$breakpoint` value from `$_breakpointMap`
 /// based on the key in input.
 ///
 /// @param {String} $breakpoint - Name of breakpoint
@@ -63,7 +63,7 @@ $_boundDiff: 1px;
   @return lib.getOrDie($_breakpoints, $breakpoint);
 }
 
-/// Returns the entire `$_breakpoints` map.
+/// Returns the entire `$_breakpointMap`.
 ///
 /// @return {Map} The breakpoint map
 ///
@@ -78,7 +78,7 @@ $_boundDiff: 1px;
 /// @return {Boolean}
 ///
 /// @example scss - Check if a breakpoint is base
-///   @each $breakpointName, $_ in $_breakpoints {
+///   @each $breakpointName, $_ in $_breakpointMap {
 ///     @debug($breakpointName, isBase($breakpointName))
 ///   }
 ///   //  base, true

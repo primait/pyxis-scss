@@ -67,8 +67,8 @@ $_colors: (
 );
 
 /// The color palette of Pyxis.
+/// @ignore This variable is useful only in sassdoc documentation
 ///
-/// @type Map
 /// @prop {Color} actionBase [#067f96]
 /// @prop {Color} actionDark [#045767]
 /// @prop {Color} actionLight [#e5f1f4]
@@ -91,9 +91,9 @@ $_colors: (
 /// @prop {Color} successBase [#1d8147]
 /// @prop {Color} successDark [#145a31]
 /// @prop {Color} successLight [#e8f2ec]
-///
-/// @access public
-$colors: ();
+/// 
+/// @type Map
+$_colorsMap: ();
 
 /// The color palette for text
 ///
@@ -112,16 +112,15 @@ $_gradients: (
 );
 
 /// The gradient palette of Pyxis.
+/// @ignore This variable is useful only in sassdoc documentation
 ///
 /// @type Map
 /// @prop {Color} action [linear-gradient(45deg, #067f96, #e5f1f4)]
 /// @prop {Color} brand [linear-gradient(45deg, #8334c2, #f2eaf8)]
 /// @prop {Color} neutral [linear-gradient(45deg, #595d6a, #21283b)]
-///
-/// @access public
-$gradients: ();
+$_gradientsMap: ();
 
-/// Returns the `$color` hex from map `$colors`.
+/// Returns the `$color` hex from map `$_colorsMap`.
 ///
 /// @param {String} $color - Name of color
 /// @return {Color} Representation of named color
@@ -135,7 +134,7 @@ $gradients: ();
   @return lib.getOrDie($_colors, $color);
 }
 
-/// Returns the `$gradient` from map `$gradients`.
+/// Returns the `$gradient` from `$_gradientsMap`.
 ///
 /// @param {String} $gradient - Name of gradient
 /// @return {Gradient} Representation of named gradient

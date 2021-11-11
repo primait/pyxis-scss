@@ -19,6 +19,7 @@ $_radius: (
 );
 
 /// Border radius map.
+/// @ignore This variable is useful only in sassdoc documentation
 ///
 /// @prop {Number} xl [25px]
 /// @prop {Number} l [20px]
@@ -27,8 +28,7 @@ $_radius: (
 /// @prop {Number} xs [5px]
 ///
 /// @type Map
-/// @access public
-$radius: ();
+$_radiusMap: ();
 
 /// List of allowed edges for border-radius
 ///
@@ -45,8 +45,7 @@ $_edges: (all, top, right, bottom, left);
 /// @prop {String} left
 ///
 /// @type List
-/// @access public
-$edges: ();
+$_edgesList: ();
 
 /// Returns the radius value from map $_radius
 ///
@@ -74,7 +73,7 @@ $edges: ();
 ///     @include radius(l, bottom);
 ///   }
 ///
-/// @throw Error if `$edge` in input is not present in `$edges` list
+/// @throw Error if `$edge` in input is not present in `$_edgesList`
 /// @access public
 @mixin radius($size, $edge: all) {
   @if index($_edges, $edge) {
