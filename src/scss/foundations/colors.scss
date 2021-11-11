@@ -66,8 +66,9 @@ $_colors: (
   successLight: $_colorSuccessLight,
 );
 
-/// The color palette of Pyxis.
-/// @ignore This variable is useful only in sassdoc documentation
+/// The color palette of Pyxis.  
+/// <em style="font-size:small;">This variable is private, please use function `color()`
+/// described below to retrieve a single value from the map.</em>
 ///
 /// @prop {Color} actionBase [#067f96]
 /// @prop {Color} actionDark [#045767]
@@ -111,8 +112,9 @@ $_gradients: (
   neutral: $_gradientNeutral,
 );
 
-/// The gradient palette of Pyxis.
-/// @ignore This variable is useful only in sassdoc documentation
+/// The gradient palette of Pyxis.  
+/// <em style="font-size:small;">This variable is private, please use function `gradient()`
+/// described below to retrieve a single value from the map.</em>
 ///
 /// @type Map
 /// @prop {Color} action [linear-gradient(45deg, #067f96, #e5f1f4)]

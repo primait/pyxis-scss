@@ -17,8 +17,8 @@ $_elevationSize: (
   l: 0 lib.rem(30px) lib.rem(60px) lib.rem(-10px),
 );
 
-/// Elevations sizing map.
-/// @ignore This variable is useful only in sassdoc documentation
+/// Elevations sizing map.  
+/// <em style="font-size:small;">This variable is private.</em>
 ///
 /// @prop {String} s [0 5px 10px -2px]
 /// @prop {String} m [0 15px 30px -5px]
@@ -40,8 +40,8 @@ $_elevationColor: (
   neutral40: rgba(colors.color(neutral25), 0.4),
 );
 
-/// Elevations color map.
-/// @ignore This variable is useful only in sassdoc documentation
+/// Elevations color map.  
+/// <em style="font-size:small;">This variable is private.</em>
 ///
 /// @prop {Color} action15 [rgba(#067f96, 0.15)]
 /// @prop {Color} action40 [rgba(#067f96, 0.4)]

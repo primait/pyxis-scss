@@ -18,8 +18,8 @@ $_radius: (
   xs: 5px,
 );
 
-/// Border radius map.
-/// @ignore This variable is useful only in sassdoc documentation
+/// Border radius map.  
+/// <em style="font-size:small;">This variable is private.</em>
 ///
 /// @prop {Number} xl [25px]
 /// @prop {Number} l [20px]
@@ -36,7 +36,8 @@ $_radiusMap: ();
 /// @access private
 $_edges: (all, top, right, bottom, left);
 
-/// List of allowed edges for border-radius.
+/// List of allowed edges for border-radius.  
+/// <em style="font-size:small;">This variable is private.</em>
 /// 
 /// @prop {String} all
 /// @prop {String} top

@@ -19,6 +19,15 @@
 ///   
 ///   getOrDie($colors, brandBase)
 ///   // #8334c2
+/// @example scss - Retrieve an unexpected color from colors map
+///   $colors: (
+///     brandBase: #8334c2,
+///     brandDark: #5b2488,
+///     brandLight: #f2eaf8,
+///   );
+///   
+///   getOrDie($colors, successColor)
+///   // ERROR: Unknown key `successColor` in map
 ///
 /// @throw Error if `$keys` is not in map.
 /// @access public

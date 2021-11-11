@@ -52,8 +52,8 @@ $_spacings: (
   ),
 );
 
-/// Spacing list.
-/// @ignore This variable is useful only in sassdoc documentation
+/// Spacing list.  
+/// <em style="font-size:small;">This variable is private.</em>
 ///
 /// @prop {String} xxxl
 /// @prop {String} xxl
@@ -94,7 +94,7 @@ $_spacingsList: ();
 ///
 /// @example scss - Set equal padding in every direction
 ///  .element {
-///     @include padding(xl);
+///     @include padding(s);
 ///  }
 ///
 /// @access public
@@ -110,7 +110,7 @@ $_spacingsList: ();
 ///
 /// @example scss - Set vertical padding 
 ///  .element {
-///     @include verticalPadding(m);
+///     @include verticalPadding(s);
 ///  }
 /// 
 /// @access public
@@ -127,7 +127,7 @@ $_spacingsList: ();
 ///
 /// @example scss - Set vertical padding 
 ///  .element {
-///     @include horizontalPadding(m);
+///     @include horizontalPadding(s);
 ///  }
 /// 
 /// @access public
@@ -145,7 +145,7 @@ $_spacingsList: ();
 ///
 /// @example scss - Set margin bottom 
 ///  .element {
-///     @include verticalSpacing(m);
+///     @include verticalSpacing(s);
 ///  }
 /// 
 /// @access public
@@ -166,7 +166,7 @@ $_spacingsList: ();
 ///
 /// @example scss - Set margin right 
 ///  .element {
-///     @include horizontalSpacing(xxs);
+///     @include horizontalSpacing(s);
 ///  }
 /// 
 /// @access public
@@ -189,7 +189,7 @@ $_spacingsList: ();
 /// @example scss - Set vertical gap in a grid environment 
 ///  .element {
 ///     display: grid;
-///     @include rowGap(l);
+///     @include rowGap(s);
 ///  }
 /// 
 /// @access public
@@ -208,7 +208,7 @@ $_spacingsList: ();
 /// @example scss - Set horizontal gap in a grid environment 
 ///  .element {
 ///     display: grid;
-///     @include columnGap(l);
+///     @include columnGap(s);
 ///  }
 /// 
 /// @access public

@@ -28,8 +28,9 @@ $_breakpoints: (
   xlarge: $_breakpointXlarge,
 );
 
-/// The breakpoints of Pyxis.
-/// @ignore This variable is useful only in sassdoc documentation
+/// The breakpoints of Pyxis.  
+/// <em style="font-size:small;">This variable is private, please use functions below to
+/// retrieve a single value or all the map.</em>
 ///
 /// @prop {Number} base [1px]
 /// @prop {Number} xxsmall [375px]
