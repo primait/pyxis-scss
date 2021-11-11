@@ -33,9 +33,9 @@ $_colorSuccessBase: #1d8147;
 $_colorSuccessDark: #145a31;
 $_colorSuccessLight: #e8f2ec;
 
-$_gradientAction: linear-gradient(45deg, $_colorActionBase, $_colorActionLight);
-$_gradientBrand: linear-gradient(45deg, $_colorBrandBase, $_colorBrandLight);
-$_gradientNeutral: linear-gradient(45deg, $_colorNeutral25, $_colorNeutralBase);
+$_gradientAction: linear-gradient(45deg, $_colorActionDark, $_colorActionBase);
+$_gradientBrand: linear-gradient(45deg, $_colorBrandDark, $_colorBrandBase);
+$_gradientNeutral: linear-gradient(45deg, $_colorNeutralBase, $_colorNeutral25);
 
 /// The color palette of Pyxis
 ///

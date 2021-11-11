@@ -99,7 +99,7 @@ $_letterSpacing: (
 ///
 /// @alias typographyGlobalSettings
 /// @access public
-@mixin typographyGlobalSettings() {
+@mixin globalSettings() {
   @include _fontWeight(book);
   font-family: _fontFamily($_font);
   font-feature-settings: lib.getOrDie($_font, featureSettings);
@@ -107,6 +107,7 @@ $_letterSpacing: (
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-variant-ligatures: none;
+  line-height: _lineHeight(config.$fontSizeRoot);
   text-rendering: optimizeLegibility;
 }
 
@@ -168,7 +169,7 @@ $_letterSpacing: (
 
 /// Include the responsive text size by name available in `text.$fontSizes`.
 ///
-/// @param {String} $size - The name of the size: 
+/// @param {String} $size - The name of the size:
 /// @param {String} $weight - The name of the weight
 ///
 /// @output Appropriate `font-size`, `letter-spacing`, `line-height`
